@@ -1,0 +1,24 @@
+{
+    "name": "@yaul/core",
+    "version": "0.0.1",
+    "description": "Yet another UI library",
+    "repository": "https://github.com/ivanjermakov/yaul",
+    "author": "ivanjermakov",
+    "type": "module",
+    "readme": "README.md",
+    "license": "MIT",
+    "private": false,
+    "scripts": {
+        "build:dev": "tsc",
+        "build:prod": "tsc -p tsconfig.prod.json && cp package.json dist",
+        "watch": "tsc -w",
+        "ci": "bun test",
+        "clean": "rm -r dist"
+    },
+    "devDependencies": {
+        "@types/node": "18.16.3",
+        "bun": "1.0.18",
+        "typescript": "5.0.4"
+    },
+    "dependencies": {}
+}

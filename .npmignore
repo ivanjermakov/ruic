@@ -1,0 +1,12 @@
+!dist/**/*.*
+.idea
+dist
+node_modules
+pnpm-lock.yaml
+
+.github
+data
+src
+jest.config.ts
+tsconfig.json
+tsconfig.prod.json
