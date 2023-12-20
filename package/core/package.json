@@ -4,10 +4,10 @@
     "description": "Yet another UI library",
     "repository": "https://github.com/ivanjermakov/yaul",
     "author": "ivanjermakov",
-    "type": "module",
     "readme": "README.md",
     "license": "MIT",
     "private": false,
+    "type": "module",
     "scripts": {
         "build:dev": "tsc",
         "build:prod": "tsc -p tsconfig.prod.json && cp package.json dist",

@@ -1,1 +1,1 @@
-export { jsx as jsxDEV } from "./jsx";
+export { jsx as jsxDEV } from "./jsx-runtime";

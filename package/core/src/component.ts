@@ -1,6 +1,6 @@
-import { JSX } from "./jsx-internal";
+import { JsxElement } from "./jsx-runtime";
 
 export abstract class Component<P = {}> {
     constructor(public props: P) { }
-    abstract render(): JSX.Element
+    abstract render(): JsxElement
 }

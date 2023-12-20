@@ -1,9 +1,7 @@
 import { Component } from './component';
-export import JSX = JSX
+import { JsxElement } from './jsx-runtime';
 
-import { JSX } from './jsx-internal';
-
-export function render(jsx: JSX.Element, root: HTMLElement): void {
+export function render(jsx: JsxElement, root: HTMLElement): void {
     console.log('render!', jsx)
     typeof jsx.type === 'function'
         ? renderComponent(new jsx.type(), root)
@@ -14,7 +12,7 @@ function renderComponent<P>(component: Component<P>, root: HTMLElement): void {
     render(component.render(), root)
 }
 
-function createIntrinsic(jsx: JSX.Element, root: HTMLElement): void {
+function createIntrinsic(jsx: JsxElement, root: HTMLElement): void {
     const el = document.createElement(<string>jsx.type)
     const props = (<any>jsx).props
     const children = props['children']
