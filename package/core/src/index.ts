@@ -17,7 +17,12 @@ function createIntrinsic(jsx: JSX.Element, root: HTMLElement): void {
     if (children) {
         renderChildren(children, el)
     }
-    Object.entries(jsx)
+    Object.entries(jsx.props)
+        .filter(([k]) => k.startsWith('on'))
+        .forEach(([prop, value]) => {
+            return el.addEventListener(prop.slice(2).toLowerCase(), <EventListenerOrEventListenerObject>value)
+        })
+    Object.entries(jsx.props)
         .filter(([k]) => k !== "children")
         .forEach(([prop, value]) => ((<any>el)[prop] = value))
     root.appendChild(el)
