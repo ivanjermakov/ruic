@@ -1,3 +1,3 @@
-describe('init', () => {
-    it('should initialize', () => { })
+describe("init", () => {
+    it("should initialize", () => {})
 })
