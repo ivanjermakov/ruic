@@ -9,7 +9,12 @@ export class JsxElement<P = {}> {
         public type: JsxElementType<P>,
         public props: P,
         public key?: any
-    ) {}
+    ) {
+        const ps = <any>props
+        if ('children' in ps && !Array.isArray(ps.children)) {
+            ps.children = [ps.children]
+        }
+    }
 }
 
 export function jsx<P>(type: JsxElementType<P>, props: P, key?: any): JsxElement<P> {

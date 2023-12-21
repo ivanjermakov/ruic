@@ -27,8 +27,6 @@ export function renderChildren(children: any, root: HTMLElement): void {
     if (typeof children === "string") {
         root.innerHTML = children
     } else if (Array.isArray(children)) {
-        children.forEach((c) => render(c, root))
-    } else {
-        render(children, root)
+        children.forEach(c => typeof c === 'string' ? root.innerHTML += c : render(c, root))
     }
 }
