@@ -1,6 +1,6 @@
 import { Component } from "./component"
 
-export type JsxComponentType<P> = new () => Component<P>
+export type JsxComponentType<P> = new (props?: P) => Component<P>
 
 export type JsxElementType<P> = string | JsxComponentType<P>
 
@@ -15,3 +15,5 @@ export class JsxElement<P = {}> {
 export function jsx<P>(type: JsxElementType<P>, props: P, key?: any): JsxElement<P> {
     return new JsxElement<P>(type, props, key)
 }
+
+export const jsxs = jsx

@@ -4,7 +4,7 @@ export * from "./jsx"
 
 export function render(jsx: JSX.Element, root: HTMLElement): void {
     console.log("render!", jsx)
-    typeof jsx.type === "function" ? renderComponent(new jsx.type(), root) : createIntrinsic(jsx, root)
+    typeof jsx.type === "function" ? renderComponent(new jsx.type(jsx.props), root) : createIntrinsic(jsx, root)
 }
 
 function renderComponent<P>(jsx: Component<P>, root: HTMLElement): void {
