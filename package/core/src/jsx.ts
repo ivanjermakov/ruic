@@ -25,7 +25,7 @@
 
 /// <reference lib="dom" />
 
-export {}
+export { }
 
 import { JsxComponentType, JsxElement } from "./jsx-runtime"
 
@@ -39,17 +39,17 @@ declare global {
 
         export type ElementType<P = any> =
             | {
-                  [K in keyof IntrinsicElements]: P extends IntrinsicElements[K] ? K : never
-              }[keyof IntrinsicElements]
+                [K in keyof IntrinsicElements]: P extends IntrinsicElements[K] ? K : never
+            }[keyof IntrinsicElements]
             | JsxComponentType<P>
-        export interface Element extends JsxElement<any> {}
+        export interface Element extends JsxElement<any> { }
 
         export interface ElementAttributesProperty {
             props: any
         }
 
         export interface ElementChildrenAttribute {
-            children: any
+            children?: any
         }
 
         export type DOMCSSProperties = {
@@ -80,6 +80,21 @@ declare global {
             accumulate?: "none" | "sum" | undefined | SignalLike<"none" | "sum" | undefined>
             additive?: "replace" | "sum" | undefined | SignalLike<"replace" | "sum" | undefined>
             alignmentBaseline?:
+            | "auto"
+            | "baseline"
+            | "before-edge"
+            | "text-before-edge"
+            | "middle"
+            | "central"
+            | "after-edge"
+            | "text-after-edge"
+            | "ideographic"
+            | "alphabetic"
+            | "hanging"
+            | "mathematical"
+            | "inherit"
+            | undefined
+            | SignalLike<
                 | "auto"
                 | "baseline"
                 | "before-edge"
@@ -94,23 +109,23 @@ declare global {
                 | "mathematical"
                 | "inherit"
                 | undefined
-                | SignalLike<
-                      | "auto"
-                      | "baseline"
-                      | "before-edge"
-                      | "text-before-edge"
-                      | "middle"
-                      | "central"
-                      | "after-edge"
-                      | "text-after-edge"
-                      | "ideographic"
-                      | "alphabetic"
-                      | "hanging"
-                      | "mathematical"
-                      | "inherit"
-                      | undefined
-                  >
+            >
             "alignment-baseline"?:
+            | "auto"
+            | "baseline"
+            | "before-edge"
+            | "text-before-edge"
+            | "middle"
+            | "central"
+            | "after-edge"
+            | "text-after-edge"
+            | "ideographic"
+            | "alphabetic"
+            | "hanging"
+            | "mathematical"
+            | "inherit"
+            | undefined
+            | SignalLike<
                 | "auto"
                 | "baseline"
                 | "before-edge"
@@ -125,42 +140,27 @@ declare global {
                 | "mathematical"
                 | "inherit"
                 | undefined
-                | SignalLike<
-                      | "auto"
-                      | "baseline"
-                      | "before-edge"
-                      | "text-before-edge"
-                      | "middle"
-                      | "central"
-                      | "after-edge"
-                      | "text-after-edge"
-                      | "ideographic"
-                      | "alphabetic"
-                      | "hanging"
-                      | "mathematical"
-                      | "inherit"
-                      | undefined
-                  >
+            >
             allowReorder?: "no" | "yes" | undefined | SignalLike<"no" | "yes" | undefined>
             "allow-reorder"?: "no" | "yes" | undefined | SignalLike<"no" | "yes" | undefined>
             alphabetic?: number | string | undefined | SignalLike<number | string | undefined>
             amplitude?: number | string | undefined | SignalLike<number | string | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/arabic-form */
             arabicForm?:
-                | "initial"
-                | "medial"
-                | "terminal"
-                | "isolated"
-                | undefined
-                | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
+            | "initial"
+            | "medial"
+            | "terminal"
+            | "isolated"
+            | undefined
+            | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/arabic-form */
             "arabic-form"?:
-                | "initial"
-                | "medial"
-                | "terminal"
-                | "isolated"
-                | undefined
-                | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
+            | "initial"
+            | "medial"
+            | "terminal"
+            | "isolated"
+            | undefined
+            | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
             ascent?: number | string | undefined | SignalLike<number | string | undefined>
             attributeName?: string | undefined | SignalLike<string | undefined>
             attributeType?: string | undefined | SignalLike<string | undefined>
@@ -186,19 +186,19 @@ declare global {
             colorInterpolation?: number | string | undefined | SignalLike<number | string | undefined>
             "color-interpolation"?: number | string | undefined | SignalLike<number | string | undefined>
             colorInterpolationFilters?:
-                | "auto"
-                | "sRGB"
-                | "linearRGB"
-                | "inherit"
-                | undefined
-                | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
+            | "auto"
+            | "sRGB"
+            | "linearRGB"
+            | "inherit"
+            | undefined
+            | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
             "color-interpolation-filters"?:
-                | "auto"
-                | "sRGB"
-                | "linearRGB"
-                | "inherit"
-                | undefined
-                | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
+            | "auto"
+            | "sRGB"
+            | "linearRGB"
+            | "inherit"
+            | undefined
+            | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
             colorProfile?: number | string | undefined | SignalLike<number | string | undefined>
             "color-profile"?: number | string | undefined | SignalLike<number | string | undefined>
             colorRendering?: number | string | undefined | SignalLike<number | string | undefined>
@@ -233,17 +233,17 @@ declare global {
             fillOpacity?: number | string | undefined | SignalLike<number | string | undefined>
             "fill-opacity"?: number | string | undefined | SignalLike<number | string | undefined>
             fillRule?:
-                | "nonzero"
-                | "evenodd"
-                | "inherit"
-                | undefined
-                | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
+            | "nonzero"
+            | "evenodd"
+            | "inherit"
+            | undefined
+            | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
             "fill-rule"?:
-                | "nonzero"
-                | "evenodd"
-                | "inherit"
-                | undefined
-                | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
+            | "nonzero"
+            | "evenodd"
+            | "inherit"
+            | undefined
+            | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
             filter?: string | undefined | SignalLike<string | undefined>
             filterRes?: number | string | undefined | SignalLike<number | string | undefined>
             filterUnits?: number | string | undefined | SignalLike<number | string | undefined>
@@ -401,33 +401,33 @@ declare global {
             strokeDashoffset?: string | number | undefined | SignalLike<number | string | undefined>
             "stroke-dashoffset"?: string | number | undefined | SignalLike<number | string | undefined>
             strokeLinecap?:
-                | "butt"
-                | "round"
-                | "square"
-                | "inherit"
-                | undefined
-                | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
+            | "butt"
+            | "round"
+            | "square"
+            | "inherit"
+            | undefined
+            | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
             "stroke-linecap"?:
-                | "butt"
-                | "round"
-                | "square"
-                | "inherit"
-                | undefined
-                | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
+            | "butt"
+            | "round"
+            | "square"
+            | "inherit"
+            | undefined
+            | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
             strokeLinejoin?:
-                | "miter"
-                | "round"
-                | "bevel"
-                | "inherit"
-                | undefined
-                | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
+            | "miter"
+            | "round"
+            | "bevel"
+            | "inherit"
+            | undefined
+            | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
             "stroke-linejoin"?:
-                | "miter"
-                | "round"
-                | "bevel"
-                | "inherit"
-                | undefined
-                | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
+            | "miter"
+            | "round"
+            | "bevel"
+            | "inherit"
+            | undefined
+            | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
             strokeMiterlimit?: string | number | undefined | SignalLike<number | string | undefined>
             "stroke-miterlimit"?: string | number | undefined | SignalLike<number | string | undefined>
             strokeOpacity?: number | string | undefined | SignalLike<number | string | undefined>
@@ -1130,8 +1130,8 @@ declare global {
 
         export interface HTMLAttributes<RefType extends EventTarget = EventTarget>
             extends DOMAttributes<RefType>,
-                AriaAttributes,
-                ElementChildrenAttribute {
+            AriaAttributes,
+            ElementChildrenAttribute {
             // Standard HTML Attributes
             accept?: string | undefined | SignalLike<string | undefined>
             acceptCharset?: string | undefined | SignalLike<string | undefined>
@@ -1168,11 +1168,11 @@ declare global {
             colspan?: number | undefined | SignalLike<number | undefined>
             content?: string | undefined | SignalLike<string | undefined>
             contentEditable?:
-                | Booleanish
-                | ""
-                | "plaintext-only"
-                | undefined
-                | SignalLike<Booleanish | "" | "plaintext-only" | undefined>
+            | Booleanish
+            | ""
+            | "plaintext-only"
+            | undefined
+            | SignalLike<Booleanish | "" | "plaintext-only" | undefined>
             contenteditable?: HTMLAttributes["contentEditable"]
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contextmenu */
             contextMenu?: string | undefined | SignalLike<string | undefined>
@@ -1199,15 +1199,15 @@ declare global {
             encType?: string | undefined | SignalLike<string | undefined>
             enctype?: string | undefined | SignalLike<string | undefined>
             enterkeyhint?:
-                | "enter"
-                | "done"
-                | "go"
-                | "next"
-                | "previous"
-                | "search"
-                | "send"
-                | undefined
-                | SignalLike<"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined>
+            | "enter"
+            | "done"
+            | "go"
+            | "next"
+            | "previous"
+            | "search"
+            | "send"
+            | undefined
+            | SignalLike<"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined>
             elementTiming?: string | undefined | SignalLike<string | undefined>
             elementtiming?: HTMLAttributes["elementTiming"]
             exportparts?: string | undefined | SignalLike<string | undefined>
@@ -1228,11 +1228,11 @@ declare global {
             headers?: string | undefined | SignalLike<string | undefined>
             height?: number | string | undefined | SignalLike<number | string | undefined>
             hidden?:
-                | boolean
-                | "hidden"
-                | "until-found"
-                | undefined
-                | SignalLike<boolean | "hidden" | "until-found" | undefined>
+            | boolean
+            | "hidden"
+            | "until-found"
+            | undefined
+            | SignalLike<boolean | "hidden" | "until-found" | undefined>
             high?: number | undefined | SignalLike<number | undefined>
             href?: string | undefined | SignalLike<string | undefined>
             hrefLang?: string | undefined | SignalLike<string | undefined>
@@ -1290,6 +1290,16 @@ declare global {
             readonly?: boolean | undefined | SignalLike<boolean | undefined>
             readOnly?: boolean | undefined | SignalLike<boolean | undefined>
             referrerpolicy?:
+            | "no-referrer"
+            | "no-referrer-when-downgrade"
+            | "origin"
+            | "origin-when-cross-origin"
+            | "same-origin"
+            | "strict-origin"
+            | "strict-origin-when-cross-origin"
+            | "unsafe-url"
+            | undefined
+            | SignalLike<
                 | "no-referrer"
                 | "no-referrer-when-downgrade"
                 | "origin"
@@ -1299,17 +1309,7 @@ declare global {
                 | "strict-origin-when-cross-origin"
                 | "unsafe-url"
                 | undefined
-                | SignalLike<
-                      | "no-referrer"
-                      | "no-referrer-when-downgrade"
-                      | "origin"
-                      | "origin-when-cross-origin"
-                      | "same-origin"
-                      | "strict-origin"
-                      | "strict-origin-when-cross-origin"
-                      | "unsafe-url"
-                      | undefined
-                  >
+            >
             rel?: string | undefined | SignalLike<string | undefined>
             required?: boolean | undefined | SignalLike<boolean | undefined>
             reversed?: boolean | undefined | SignalLike<boolean | undefined>
@@ -1356,23 +1356,23 @@ declare global {
 
             // Non-standard Attributes
             autocapitalize?:
-                | "off"
-                | "none"
-                | "on"
-                | "sentences"
-                | "words"
-                | "characters"
-                | undefined
-                | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
+            | "off"
+            | "none"
+            | "on"
+            | "sentences"
+            | "words"
+            | "characters"
+            | undefined
+            | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
             autoCapitalize?:
-                | "off"
-                | "none"
-                | "on"
-                | "sentences"
-                | "words"
-                | "characters"
-                | undefined
-                | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
+            | "off"
+            | "none"
+            | "on"
+            | "sentences"
+            | "words"
+            | "characters"
+            | undefined
+            | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
             disablePictureInPicture?: boolean | undefined | SignalLike<boolean | undefined>
             results?: number | undefined | SignalLike<number | undefined>
             translate?: "yes" | "no" | undefined | SignalLike<"yes" | "no" | undefined>
@@ -1407,19 +1407,19 @@ declare global {
 
         export interface HTMLMarqueeElement extends HTMLElement {
             behavior?:
-                | "scroll"
-                | "slide"
-                | "alternate"
-                | undefined
-                | SignalLike<"scroll" | "slide" | "alternate" | undefined>
+            | "scroll"
+            | "slide"
+            | "alternate"
+            | undefined
+            | SignalLike<"scroll" | "slide" | "alternate" | undefined>
             bgColor?: string | undefined | SignalLike<string | undefined>
             direction?:
-                | "left"
-                | "right"
-                | "up"
-                | "down"
-                | undefined
-                | SignalLike<"left" | "right" | "up" | "down" | undefined>
+            | "left"
+            | "right"
+            | "up"
+            | "down"
+            | undefined
+            | SignalLike<"left" | "right" | "up" | "down" | undefined>
             height?: number | string | undefined | SignalLike<number | string | undefined>
             hspace?: number | string | undefined | SignalLike<number | string | undefined>
             loop?: number | string | undefined | SignalLike<number | string | undefined>
@@ -1472,7 +1472,7 @@ declare global {
             notation?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMErrorElement extends MathMLElement {}
+        export interface HTMLMErrorElement extends MathMLElement { }
 
         export interface HTMLMFencedElement extends MathMLElement {
             close?: string | undefined | SignalLike<string | undefined>
@@ -1492,6 +1492,26 @@ declare global {
             /** The only value allowed in the current specification is normal (case insensitive)
              * See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mi#mathvariant */
             mathvariant?:
+            | "normal"
+            | "bold"
+            | "italic"
+            | "bold-italic"
+            | "double-struck"
+            | "bold-fraktur"
+            | "script"
+            | "bold-script"
+            | "fraktur"
+            | "sans-serif"
+            | "bold-sans-serif"
+            | "sans-serif-italic"
+            | "sans-serif-bold-italic"
+            | "monospace"
+            | "initial"
+            | "tailed"
+            | "looped"
+            | "stretched"
+            | undefined
+            | SignalLike<
                 | "normal"
                 | "bold"
                 | "italic"
@@ -1511,27 +1531,7 @@ declare global {
                 | "looped"
                 | "stretched"
                 | undefined
-                | SignalLike<
-                      | "normal"
-                      | "bold"
-                      | "italic"
-                      | "bold-italic"
-                      | "double-struck"
-                      | "bold-fraktur"
-                      | "script"
-                      | "bold-script"
-                      | "fraktur"
-                      | "sans-serif"
-                      | "bold-sans-serif"
-                      | "sans-serif-italic"
-                      | "sans-serif-bold-italic"
-                      | "monospace"
-                      | "initial"
-                      | "tailed"
-                      | "looped"
-                      | "stretched"
-                      | undefined
-                  >
+            >
         }
 
         export interface HTMLMmultiScriptsElement extends MathMLElement {
@@ -1541,7 +1541,7 @@ declare global {
             superscriptshift?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMNElement extends MathMLElement {}
+        export interface HTMLMNElement extends MathMLElement { }
 
         export interface HTMLMOElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mo#accent */
@@ -1570,13 +1570,13 @@ declare global {
             width?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMPhantomElement extends MathMLElement {}
+        export interface HTMLMPhantomElement extends MathMLElement { }
 
-        export interface HTMLMPrescriptsElement extends MathMLElement {}
+        export interface HTMLMPrescriptsElement extends MathMLElement { }
 
-        export interface HTMLMRootElement extends MathMLElement {}
+        export interface HTMLMRootElement extends MathMLElement { }
 
-        export interface HTMLMRowElement extends MathMLElement {}
+        export interface HTMLMRowElement extends MathMLElement { }
 
         export interface HTMLMSElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/ms#browser_compatibility */
@@ -1591,7 +1591,7 @@ declare global {
             width?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMSqrtElement extends MathMLElement {}
+        export interface HTMLMSqrtElement extends MathMLElement { }
 
         export interface HTMLMStyleElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mstyle#background */
@@ -1630,13 +1630,13 @@ declare global {
         export interface HTMLMTableElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#align */
             align?:
-                | "axis"
-                | "baseline"
-                | "bottom"
-                | "center"
-                | "top"
-                | undefined
-                | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+            | "axis"
+            | "baseline"
+            | "bottom"
+            | "center"
+            | "top"
+            | undefined
+            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#columnalign */
             columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#columnlines */
@@ -1649,13 +1649,13 @@ declare global {
             framespacing?: string | undefined | SignalLike<string | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowalign */
             rowalign?:
-                | "axis"
-                | "baseline"
-                | "bottom"
-                | "center"
-                | "top"
-                | undefined
-                | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+            | "axis"
+            | "baseline"
+            | "bottom"
+            | "center"
+            | "top"
+            | undefined
+            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowlines */
             rowlines?: "dashed" | "none" | "solid" | undefined | SignalLike<"dashed" | "none" | "solid" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowspacing */
@@ -1671,29 +1671,29 @@ declare global {
             columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtd#rowalign */
             rowalign?:
-                | "axis"
-                | "baseline"
-                | "bottom"
-                | "center"
-                | "top"
-                | undefined
-                | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+            | "axis"
+            | "baseline"
+            | "bottom"
+            | "center"
+            | "top"
+            | undefined
+            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
         }
 
-        export interface HTMLMTextElement extends MathMLElement {}
+        export interface HTMLMTextElement extends MathMLElement { }
 
         export interface HTMLMTrElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtr#columnalign */
             columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtr#rowalign */
             rowalign?:
-                | "axis"
-                | "baseline"
-                | "bottom"
-                | "center"
-                | "top"
-                | undefined
-                | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+            | "axis"
+            | "baseline"
+            | "bottom"
+            | "center"
+            | "top"
+            | undefined
+            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
         }
 
         export interface HTMLMUnderElement extends MathMLElement {
@@ -1705,7 +1705,7 @@ declare global {
             accentunder?: boolean | undefined | SignalLike<boolean | undefined>
         }
 
-        export interface HTMLSemanticsElement extends MathMLElement {}
+        export interface HTMLSemanticsElement extends MathMLElement { }
 
         export interface IntrinsicElements {
             // HTML
