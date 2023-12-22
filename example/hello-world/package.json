@@ -9,7 +9,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@yaul/core": "../../package/core/dist"
+        "ruic": "../../dist"
     },
     "devDependencies": {
         "typescript": "^5.2.2",

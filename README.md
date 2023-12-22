@@ -1,4 +1,4 @@
-# yaul
+# ruic
 
-Yet another UI library
+Reactive UI Components library 
 

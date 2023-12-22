@@ -1,4 +1,4 @@
-import { render } from '@yaul/core'
+import { render } from 'ruic'
 import { App } from './app.tsx'
 
 const app = <App />

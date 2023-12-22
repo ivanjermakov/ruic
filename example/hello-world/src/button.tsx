@@ -1,4 +1,4 @@
-import { Component } from '@yaul/core/component'
+import { Component } from 'ruic/component'
 
 export class Button extends Component<JSX.HTMLAttributes> {
     override render() {

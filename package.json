@@ -1,8 +1,8 @@
 {
-    "name": "@yaul/core",
+    "name": "ruic",
     "version": "0.0.1",
-    "description": "Yet another UI library",
-    "repository": "https://github.com/ivanjermakov/yaul",
+    "description": "Reactive UI Components library",
+    "repository": "https://github.com/ivanjermakov/ruic",
     "author": "ivanjermakov",
     "readme": "README.md",
     "license": "MIT",

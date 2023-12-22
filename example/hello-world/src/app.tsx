@@ -1,4 +1,4 @@
-import { Component } from '@yaul/core/component'
+import { Component } from 'ruic/component'
 import { Button } from './button'
 
 export class App extends Component<{}> {
