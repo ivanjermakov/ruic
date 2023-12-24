@@ -17,3 +17,7 @@ h1 {
     padding: 1rem;
     border: 2px solid black;
 }
+
+button {
+    font-size: 1.25rem;
+}
