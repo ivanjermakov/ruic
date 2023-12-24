@@ -1,0 +1,19 @@
+html, body {
+    height: 100%
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.app {
+    padding: 1rem;
+    border: 2px solid black;
+}
