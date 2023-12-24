@@ -1,10 +1,10 @@
 import { Component } from "./component"
 
-export type JsxComponentType<P> = new (props?: P) => Component<P>
+export type JsxComponentType<P extends JSX.HTMLAttributes> = new (props: P) => Component<P>
 
-export type JsxElementType<P> = string | JsxComponentType<P>
+export type JsxElementType<P extends JSX.HTMLAttributes> = string | JsxComponentType<P>
 
-export class JsxElement<P = {}> {
+export class JsxElement<P extends JSX.HTMLAttributes> {
     constructor(
         public type: JsxElementType<P>,
         public props: P,
@@ -19,7 +19,7 @@ export class JsxElement<P = {}> {
     children(): JSX.Element[] {
         const ps = <any>this.props
         return 'children' in ps
-            ? <JsxElement[]>ps.children
+            ? <JsxElement<any>[]>ps.children
             : []
     }
 
@@ -37,7 +37,6 @@ export class JsxElement<P = {}> {
 
         const children = this.children()
         if (children) {
-            console.log(children)
             for (const c of children) {
                 if (typeof c === 'string') {
                     el.innerHTML += c
@@ -61,8 +60,8 @@ export class JsxElement<P = {}> {
     }
 }
 
-export function jsx<P>(type: JsxElementType<P>, props: P, key?: any): JsxElement<P> {
-    return new JsxElement<P>(type, props, key)
+export function jsx<P extends JSX.HTMLAttributes>(type: JsxElementType<P>, props: P, key?: any): JsxElement<P> {
+    return new JsxElement(type, props, key)
 }
 
 export const jsxs = jsx

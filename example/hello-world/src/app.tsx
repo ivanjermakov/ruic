@@ -1,7 +1,7 @@
 import { Component } from 'ruic/component'
 import { Button } from './button'
 
-export class App extends Component<{}> {
+export class App extends Component {
     clicked: number = 0
 
     handleClick(e: MouseEvent) {

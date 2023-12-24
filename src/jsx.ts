@@ -37,7 +37,7 @@ declare global {
             key?: any
         }
 
-        export type ElementType<P = any> =
+        export type ElementType<P extends HTMLAttributes = {}> =
             | {
                 [K in keyof IntrinsicElements]: P extends IntrinsicElements[K] ? K : never
             }[keyof IntrinsicElements]
