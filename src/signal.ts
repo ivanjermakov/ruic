@@ -1,3 +1,9 @@
+export interface UnaryFunction<T, R> {
+    (source: T): R;
+}
+
+export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> { }
+
 export class Signal<T> implements JSX.SignalLike<T> {
 
     private value: T;
@@ -40,10 +46,18 @@ export class Signal<T> implements JSX.SignalLike<T> {
         })
     }
 
-    map<U>(fn: (value: T) => U): Signal<U> {
-        const s = new Signal(fn(this.get()))
-        this.subscribe(v => s.set(fn(v)))
-        return s
+    pipe<A>(op1: OperatorFunction<T, A>): Signal<A>;
+    pipe<A, B>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>): Signal<B>;
+    pipe<A, B, C>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>): Signal<C>;
+    pipe<A, B, C, D>(
+        op1: OperatorFunction<T, A>,
+        op2: OperatorFunction<A, B>,
+        op3: OperatorFunction<B, C>,
+        op4: OperatorFunction<C, D>,
+        ...operations: OperatorFunction<any, any>[]
+    ): Signal<unknown>;
+    pipe(...operations: OperatorFunction<any, any>[]): Signal<unknown> {
+        return operations.reduce((s, op) => op(s), <Signal<any>>this)
     }
 
 }
