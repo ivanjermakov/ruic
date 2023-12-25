@@ -49,16 +49,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         const children = this.children()
         if (children) {
             for (const c of children) {
-                if (c instanceof Signal) {
-                    el.innerHTML += c.get()
-                    c.once(() => this.render(this.root!))
-                } else if (typeof c === 'string') {
-                    el.innerHTML += c
-                } else if (c instanceof JsxElement) {
-                    c.render(el)
-                } else {
-                    console.warn('unexpected child', c)
-                }
+                this.renderChild(c, el)
             }
         }
 
@@ -71,7 +62,13 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
 
         Object.entries(<any>this.props)
             .filter(([k]) => k !== 'children')
-            .forEach(([prop, value]) => ((<any>el)[prop] = value))
+            .forEach(([prop, value]) => {
+                if (prop === 'class') {
+                    ((<any>el).className = value)
+                } else {
+                    ((<any>el)[prop] = value)
+                }
+            })
 
         if (rerender) {
             this.root!.insertBefore(el, this.element!)
@@ -88,6 +85,22 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         this.component = new this.type(this.props)
         this.componentElement = this.component.render()
         this.componentElement.render(this.root!)
+    }
+
+    private renderChild(c: any, el: HTMLElement): void {
+        if (Array.isArray(c)) {
+            c.forEach(sc => this.renderChild(sc, el))
+        } else if (c instanceof Signal) {
+            const cv = c.get()
+            this.renderChild(cv, el)
+            c.once(() => this.render(this.root!))
+        } else if (typeof c === 'string' || typeof c === 'number') {
+            el.innerHTML += c
+        } else if (c instanceof JsxElement) {
+            c.render(el)
+        } else {
+            console.warn('unexpected child', c)
+        }
     }
 
 }
