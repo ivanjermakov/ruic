@@ -28,6 +28,7 @@
 export { }
 
 import { JsxComponentType, JsxElement } from "./jsx-element"
+import { Subscription } from "./signal"
 
 declare global {
     export namespace JSX {
@@ -67,7 +68,7 @@ declare global {
 
         export interface SignalLike<T> {
             set(value: T): void
-            subscribe(fn: (value: T) => void): void
+            subscribe(fn: (value: T, subscription?: Subscription<T>) => void): Subscription<T>
         }
 
         export type Signalish<T> = T | SignalLike<T>
@@ -1430,7 +1431,7 @@ declare global {
         }
 
         export interface MathMLAttributes<Target extends EventTarget = MathMLElement> extends HTMLAttributes<Target> {
-            dir?: "ltr" | "rtl" | undefined | SignalLike<"ltr" | "rtl" | undefined>
+            dir?: "auto" | "ltr" | "rtl" | undefined | SignalLike<"auto" | "ltr" | "rtl" | undefined>
             displaystyle?: boolean | undefined | SignalLike<boolean | undefined>
             /** @deprecated This feature is non-standard. See https://developer.mozilla.org/en-US/docs/Web/MathML/Global_attributes/href  */
             href?: string | undefined | SignalLike<string | undefined>

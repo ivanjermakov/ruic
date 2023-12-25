@@ -12,19 +12,21 @@ export class App extends Component {
     }
 
     override render() {
-        console.log('render me!')
         return <div className="app">
             <h1 id="hello">Welcome to Ruic!</h1>
             <p>Count: {this.count}</p>
             <Button onClick={() => this.handleClick()}>{'My favorite button!'}</Button>
         </div>
     }
+
 }
 
 type ButtonProps = Pick<JSX.HTMLAttributes, 'onClick' | 'children'>
 
 export class Button extends Component<ButtonProps> {
+
     override render() {
         return <button type="button" onClick={this.props.onClick}>{this.props.children}</button>
     }
+
 }

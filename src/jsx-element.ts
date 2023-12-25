@@ -48,14 +48,10 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
 
         const children = this.children()
         if (children) {
-            console.log(children)
             for (const c of children) {
                 if (c instanceof Signal) {
                     el.innerHTML += c.get()
-                    c.subscribe(v => {
-                        console.log('signal value changed', v)
-                        this.render(this.root!)
-                    })
+                    c.once(() => this.render(this.root!))
                 } else if (typeof c === 'string') {
                     el.innerHTML += c
                 } else if (c instanceof JsxElement) {
