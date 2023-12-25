@@ -40,6 +40,12 @@ export class Signal<T> implements JSX.SignalLike<T> {
         })
     }
 
+    map<U>(fn: (value: T) => U): Signal<U> {
+        const s = new Signal(fn(this.get()))
+        this.subscribe(v => s.set(fn(v)))
+        return s
+    }
+
 }
 
 export class Subscription<T> {

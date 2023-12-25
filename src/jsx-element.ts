@@ -39,7 +39,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         if (typeof this.type === 'string') {
             this.renderIntrinsic(rerender)
         } else {
-            this.renderComponent(rerender)
+            this.renderComponent()
         }
     }
 
@@ -83,11 +83,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         }
     }
 
-    private renderComponent(rerender: boolean): void {
-        if (rerender) {
-            // TODO
-            return
-        }
+    private renderComponent(): void {
         if (typeof this.type === 'string') return
         this.component = new this.type(this.props)
         this.componentElement = this.component.render()
