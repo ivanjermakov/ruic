@@ -25,20 +25,20 @@
 
 /// <reference lib="dom" />
 
-export { }
+export {}
 
-import { JsxElement } from "./jsx-element"
-import { Subscription } from "./signal"
+import { JsxElement } from './jsx-element'
+import { Subscription } from './signal'
 
 declare global {
     export namespace JSX {
-        type Booleanish = boolean | "true" | "false"
+        type Booleanish = boolean | 'true' | 'false'
 
         export interface IntrinsicAttributes {
             key?: any
         }
 
-        export interface Element extends JsxElement<any> { }
+        export interface Element extends JsxElement<any> {}
 
         export interface ElementAttributesProperty {
             props: any
@@ -51,7 +51,7 @@ declare global {
         export type DOMCSSProperties = {
             [key in keyof Omit<
                 CSSStyleDeclaration,
-                "item" | "setProperty" | "removeProperty" | "getPropertyValue" | "getPropertyPriority"
+                'item' | 'setProperty' | 'removeProperty' | 'getPropertyValue' | 'getPropertyPriority'
             >]?: string | number | null | undefined
         }
         export type AllCSSProperties = {
@@ -72,90 +72,90 @@ declare global {
 
         export interface SVGAttributes<Target extends EventTarget = SVGElement> extends HTMLAttributes<Target> {
             accentHeight?: number | string | undefined | SignalLike<number | string | undefined>
-            accumulate?: "none" | "sum" | undefined | SignalLike<"none" | "sum" | undefined>
-            additive?: "replace" | "sum" | undefined | SignalLike<"replace" | "sum" | undefined>
+            accumulate?: 'none' | 'sum' | undefined | SignalLike<'none' | 'sum' | undefined>
+            additive?: 'replace' | 'sum' | undefined | SignalLike<'replace' | 'sum' | undefined>
             alignmentBaseline?:
-            | "auto"
-            | "baseline"
-            | "before-edge"
-            | "text-before-edge"
-            | "middle"
-            | "central"
-            | "after-edge"
-            | "text-after-edge"
-            | "ideographic"
-            | "alphabetic"
-            | "hanging"
-            | "mathematical"
-            | "inherit"
-            | undefined
-            | SignalLike<
-                | "auto"
-                | "baseline"
-                | "before-edge"
-                | "text-before-edge"
-                | "middle"
-                | "central"
-                | "after-edge"
-                | "text-after-edge"
-                | "ideographic"
-                | "alphabetic"
-                | "hanging"
-                | "mathematical"
-                | "inherit"
+                | 'auto'
+                | 'baseline'
+                | 'before-edge'
+                | 'text-before-edge'
+                | 'middle'
+                | 'central'
+                | 'after-edge'
+                | 'text-after-edge'
+                | 'ideographic'
+                | 'alphabetic'
+                | 'hanging'
+                | 'mathematical'
+                | 'inherit'
                 | undefined
-            >
-            "alignment-baseline"?:
-            | "auto"
-            | "baseline"
-            | "before-edge"
-            | "text-before-edge"
-            | "middle"
-            | "central"
-            | "after-edge"
-            | "text-after-edge"
-            | "ideographic"
-            | "alphabetic"
-            | "hanging"
-            | "mathematical"
-            | "inherit"
-            | undefined
-            | SignalLike<
-                | "auto"
-                | "baseline"
-                | "before-edge"
-                | "text-before-edge"
-                | "middle"
-                | "central"
-                | "after-edge"
-                | "text-after-edge"
-                | "ideographic"
-                | "alphabetic"
-                | "hanging"
-                | "mathematical"
-                | "inherit"
+                | SignalLike<
+                      | 'auto'
+                      | 'baseline'
+                      | 'before-edge'
+                      | 'text-before-edge'
+                      | 'middle'
+                      | 'central'
+                      | 'after-edge'
+                      | 'text-after-edge'
+                      | 'ideographic'
+                      | 'alphabetic'
+                      | 'hanging'
+                      | 'mathematical'
+                      | 'inherit'
+                      | undefined
+                  >
+            'alignment-baseline'?:
+                | 'auto'
+                | 'baseline'
+                | 'before-edge'
+                | 'text-before-edge'
+                | 'middle'
+                | 'central'
+                | 'after-edge'
+                | 'text-after-edge'
+                | 'ideographic'
+                | 'alphabetic'
+                | 'hanging'
+                | 'mathematical'
+                | 'inherit'
                 | undefined
-            >
-            allowReorder?: "no" | "yes" | undefined | SignalLike<"no" | "yes" | undefined>
-            "allow-reorder"?: "no" | "yes" | undefined | SignalLike<"no" | "yes" | undefined>
+                | SignalLike<
+                      | 'auto'
+                      | 'baseline'
+                      | 'before-edge'
+                      | 'text-before-edge'
+                      | 'middle'
+                      | 'central'
+                      | 'after-edge'
+                      | 'text-after-edge'
+                      | 'ideographic'
+                      | 'alphabetic'
+                      | 'hanging'
+                      | 'mathematical'
+                      | 'inherit'
+                      | undefined
+                  >
+            allowReorder?: 'no' | 'yes' | undefined | SignalLike<'no' | 'yes' | undefined>
+            'allow-reorder'?: 'no' | 'yes' | undefined | SignalLike<'no' | 'yes' | undefined>
             alphabetic?: number | string | undefined | SignalLike<number | string | undefined>
             amplitude?: number | string | undefined | SignalLike<number | string | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/arabic-form */
             arabicForm?:
-            | "initial"
-            | "medial"
-            | "terminal"
-            | "isolated"
-            | undefined
-            | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
+                | 'initial'
+                | 'medial'
+                | 'terminal'
+                | 'isolated'
+                | undefined
+                | SignalLike<'initial' | 'medial' | 'terminal' | 'isolated' | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/arabic-form */
-            "arabic-form"?:
-            | "initial"
-            | "medial"
-            | "terminal"
-            | "isolated"
-            | undefined
-            | SignalLike<"initial" | "medial" | "terminal" | "isolated" | undefined>
+            'arabic-form'?:
+                | 'initial'
+                | 'medial'
+                | 'terminal'
+                | 'isolated'
+                | undefined
+                | SignalLike<'initial' | 'medial' | 'terminal' | 'isolated' | undefined>
             ascent?: number | string | undefined | SignalLike<number | string | undefined>
             attributeName?: string | undefined | SignalLike<string | undefined>
             attributeType?: string | undefined | SignalLike<string | undefined>
@@ -163,7 +163,7 @@ declare global {
             azimuth?: number | string | undefined | SignalLike<number | string | undefined>
             baseFrequency?: number | string | undefined | SignalLike<number | string | undefined>
             baselineShift?: number | string | undefined | SignalLike<number | string | undefined>
-            "baseline-shift"?: number | string | undefined | SignalLike<number | string | undefined>
+            'baseline-shift'?: number | string | undefined | SignalLike<number | string | undefined>
             baseProfile?: number | string | undefined | SignalLike<number | string | undefined>
             bbox?: number | string | undefined | SignalLike<number | string | undefined>
             begin?: number | string | undefined | SignalLike<number | string | undefined>
@@ -171,37 +171,37 @@ declare global {
             by?: number | string | undefined | SignalLike<number | string | undefined>
             calcMode?: number | string | undefined | SignalLike<number | string | undefined>
             capHeight?: number | string | undefined | SignalLike<number | string | undefined>
-            "cap-height"?: number | string | undefined | SignalLike<number | string | undefined>
+            'cap-height'?: number | string | undefined | SignalLike<number | string | undefined>
             clip?: number | string | undefined | SignalLike<number | string | undefined>
             clipPath?: string | undefined | SignalLike<string | undefined>
-            "clip-path"?: string | undefined | SignalLike<string | undefined>
+            'clip-path'?: string | undefined | SignalLike<string | undefined>
             clipPathUnits?: number | string | undefined | SignalLike<number | string | undefined>
             clipRule?: number | string | undefined | SignalLike<number | string | undefined>
-            "clip-rule"?: number | string | undefined | SignalLike<number | string | undefined>
+            'clip-rule'?: number | string | undefined | SignalLike<number | string | undefined>
             colorInterpolation?: number | string | undefined | SignalLike<number | string | undefined>
-            "color-interpolation"?: number | string | undefined | SignalLike<number | string | undefined>
+            'color-interpolation'?: number | string | undefined | SignalLike<number | string | undefined>
             colorInterpolationFilters?:
-            | "auto"
-            | "sRGB"
-            | "linearRGB"
-            | "inherit"
-            | undefined
-            | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
-            "color-interpolation-filters"?:
-            | "auto"
-            | "sRGB"
-            | "linearRGB"
-            | "inherit"
-            | undefined
-            | SignalLike<"auto" | "sRGB" | "linearRGB" | "inherit" | undefined>
+                | 'auto'
+                | 'sRGB'
+                | 'linearRGB'
+                | 'inherit'
+                | undefined
+                | SignalLike<'auto' | 'sRGB' | 'linearRGB' | 'inherit' | undefined>
+            'color-interpolation-filters'?:
+                | 'auto'
+                | 'sRGB'
+                | 'linearRGB'
+                | 'inherit'
+                | undefined
+                | SignalLike<'auto' | 'sRGB' | 'linearRGB' | 'inherit' | undefined>
             colorProfile?: number | string | undefined | SignalLike<number | string | undefined>
-            "color-profile"?: number | string | undefined | SignalLike<number | string | undefined>
+            'color-profile'?: number | string | undefined | SignalLike<number | string | undefined>
             colorRendering?: number | string | undefined | SignalLike<number | string | undefined>
-            "color-rendering"?: number | string | undefined | SignalLike<number | string | undefined>
+            'color-rendering'?: number | string | undefined | SignalLike<number | string | undefined>
             contentScriptType?: number | string | undefined | SignalLike<number | string | undefined>
-            "content-script-type"?: number | string | undefined | SignalLike<number | string | undefined>
+            'content-script-type'?: number | string | undefined | SignalLike<number | string | undefined>
             contentStyleType?: number | string | undefined | SignalLike<number | string | undefined>
-            "content-style-type"?: number | string | undefined | SignalLike<number | string | undefined>
+            'content-style-type'?: number | string | undefined | SignalLike<number | string | undefined>
             cursor?: number | string | undefined | SignalLike<number | string | undefined>
             cx?: number | string | undefined | SignalLike<number | string | undefined>
             cy?: number | string | undefined | SignalLike<number | string | undefined>
@@ -213,54 +213,54 @@ declare global {
             display?: number | string | undefined | SignalLike<number | string | undefined>
             divisor?: number | string | undefined | SignalLike<number | string | undefined>
             dominantBaseline?: number | string | undefined | SignalLike<number | string | undefined>
-            "dominant-baseline"?: number | string | undefined | SignalLike<number | string | undefined>
+            'dominant-baseline'?: number | string | undefined | SignalLike<number | string | undefined>
             dur?: number | string | undefined | SignalLike<number | string | undefined>
             dx?: number | string | undefined | SignalLike<number | string | undefined>
             dy?: number | string | undefined | SignalLike<number | string | undefined>
             edgeMode?: number | string | undefined | SignalLike<number | string | undefined>
             elevation?: number | string | undefined | SignalLike<number | string | undefined>
             enableBackground?: number | string | undefined | SignalLike<number | string | undefined>
-            "enable-background"?: number | string | undefined | SignalLike<number | string | undefined>
+            'enable-background'?: number | string | undefined | SignalLike<number | string | undefined>
             end?: number | string | undefined | SignalLike<number | string | undefined>
             exponent?: number | string | undefined | SignalLike<number | string | undefined>
             externalResourcesRequired?: number | string | undefined | SignalLike<number | string | undefined>
             fill?: string | undefined | SignalLike<string | undefined>
             fillOpacity?: number | string | undefined | SignalLike<number | string | undefined>
-            "fill-opacity"?: number | string | undefined | SignalLike<number | string | undefined>
+            'fill-opacity'?: number | string | undefined | SignalLike<number | string | undefined>
             fillRule?:
-            | "nonzero"
-            | "evenodd"
-            | "inherit"
-            | undefined
-            | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
-            "fill-rule"?:
-            | "nonzero"
-            | "evenodd"
-            | "inherit"
-            | undefined
-            | SignalLike<"nonzero" | "evenodd" | "inherit" | undefined>
+                | 'nonzero'
+                | 'evenodd'
+                | 'inherit'
+                | undefined
+                | SignalLike<'nonzero' | 'evenodd' | 'inherit' | undefined>
+            'fill-rule'?:
+                | 'nonzero'
+                | 'evenodd'
+                | 'inherit'
+                | undefined
+                | SignalLike<'nonzero' | 'evenodd' | 'inherit' | undefined>
             filter?: string | undefined | SignalLike<string | undefined>
             filterRes?: number | string | undefined | SignalLike<number | string | undefined>
             filterUnits?: number | string | undefined | SignalLike<number | string | undefined>
             floodColor?: number | string | undefined | SignalLike<number | string | undefined>
-            "flood-color"?: number | string | undefined | SignalLike<number | string | undefined>
+            'flood-color'?: number | string | undefined | SignalLike<number | string | undefined>
             floodOpacity?: number | string | undefined | SignalLike<number | string | undefined>
-            "flood-opacity"?: number | string | undefined | SignalLike<number | string | undefined>
+            'flood-opacity'?: number | string | undefined | SignalLike<number | string | undefined>
             focusable?: number | string | undefined | SignalLike<number | string | undefined>
             fontFamily?: string | undefined | SignalLike<string | undefined>
-            "font-family"?: string | undefined | SignalLike<string | undefined>
+            'font-family'?: string | undefined | SignalLike<string | undefined>
             fontSize?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-size"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-size'?: number | string | undefined | SignalLike<number | string | undefined>
             fontSizeAdjust?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-size-adjust"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-size-adjust'?: number | string | undefined | SignalLike<number | string | undefined>
             fontStretch?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-stretch"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-stretch'?: number | string | undefined | SignalLike<number | string | undefined>
             fontStyle?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-style"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-style'?: number | string | undefined | SignalLike<number | string | undefined>
             fontVariant?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-variant"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-variant'?: number | string | undefined | SignalLike<number | string | undefined>
             fontWeight?: number | string | undefined | SignalLike<number | string | undefined>
-            "font-weight"?: number | string | undefined | SignalLike<number | string | undefined>
+            'font-weight'?: number | string | undefined | SignalLike<number | string | undefined>
             format?: number | string | undefined | SignalLike<number | string | undefined>
             from?: number | string | undefined | SignalLike<number | string | undefined>
             fx?: number | string | undefined | SignalLike<number | string | undefined>
@@ -268,22 +268,22 @@ declare global {
             g1?: number | string | undefined | SignalLike<number | string | undefined>
             g2?: number | string | undefined | SignalLike<number | string | undefined>
             glyphName?: number | string | undefined | SignalLike<number | string | undefined>
-            "glyph-name"?: number | string | undefined | SignalLike<number | string | undefined>
+            'glyph-name'?: number | string | undefined | SignalLike<number | string | undefined>
             glyphOrientationHorizontal?: number | string | undefined | SignalLike<number | string | undefined>
-            "glyph-orientation-horizontal"?: number | string | undefined | SignalLike<number | string | undefined>
+            'glyph-orientation-horizontal'?: number | string | undefined | SignalLike<number | string | undefined>
             glyphOrientationVertical?: number | string | undefined | SignalLike<number | string | undefined>
-            "glyph-orientation-vertical"?: number | string | undefined | SignalLike<number | string | undefined>
+            'glyph-orientation-vertical'?: number | string | undefined | SignalLike<number | string | undefined>
             glyphRef?: number | string | undefined | SignalLike<number | string | undefined>
             gradientTransform?: string | undefined | SignalLike<string | undefined>
             gradientUnits?: string | undefined | SignalLike<string | undefined>
             hanging?: number | string | undefined | SignalLike<number | string | undefined>
             horizAdvX?: number | string | undefined | SignalLike<number | string | undefined>
-            "horiz-adv-x"?: number | string | undefined | SignalLike<number | string | undefined>
+            'horiz-adv-x'?: number | string | undefined | SignalLike<number | string | undefined>
             horizOriginX?: number | string | undefined | SignalLike<number | string | undefined>
-            "horiz-origin-x"?: number | string | undefined | SignalLike<number | string | undefined>
+            'horiz-origin-x'?: number | string | undefined | SignalLike<number | string | undefined>
             ideographic?: number | string | undefined | SignalLike<number | string | undefined>
             imageRendering?: number | string | undefined | SignalLike<number | string | undefined>
-            "image-rendering"?: number | string | undefined | SignalLike<number | string | undefined>
+            'image-rendering'?: number | string | undefined | SignalLike<number | string | undefined>
             in2?: number | string | undefined | SignalLike<number | string | undefined>
             in?: string | undefined | SignalLike<string | undefined>
             intercept?: number | string | undefined | SignalLike<number | string | undefined>
@@ -300,18 +300,18 @@ declare global {
             keyTimes?: number | string | undefined | SignalLike<number | string | undefined>
             lengthAdjust?: number | string | undefined | SignalLike<number | string | undefined>
             letterSpacing?: number | string | undefined | SignalLike<number | string | undefined>
-            "letter-spacing"?: number | string | undefined | SignalLike<number | string | undefined>
+            'letter-spacing'?: number | string | undefined | SignalLike<number | string | undefined>
             lightingColor?: number | string | undefined | SignalLike<number | string | undefined>
-            "lighting-color"?: number | string | undefined | SignalLike<number | string | undefined>
+            'lighting-color'?: number | string | undefined | SignalLike<number | string | undefined>
             limitingConeAngle?: number | string | undefined | SignalLike<number | string | undefined>
             local?: number | string | undefined | SignalLike<number | string | undefined>
             markerEnd?: string | undefined | SignalLike<string | undefined>
-            "marker-end"?: string | undefined | SignalLike<string | undefined>
+            'marker-end'?: string | undefined | SignalLike<string | undefined>
             markerHeight?: number | string | undefined | SignalLike<number | string | undefined>
             markerMid?: string | undefined | SignalLike<string | undefined>
-            "marker-mid"?: string | undefined | SignalLike<string | undefined>
+            'marker-mid'?: string | undefined | SignalLike<string | undefined>
             markerStart?: string | undefined | SignalLike<string | undefined>
-            "marker-start"?: string | undefined | SignalLike<string | undefined>
+            'marker-start'?: string | undefined | SignalLike<string | undefined>
             markerUnits?: number | string | undefined | SignalLike<number | string | undefined>
             markerWidth?: number | string | undefined | SignalLike<number | string | undefined>
             mask?: string | undefined | SignalLike<string | undefined>
@@ -329,19 +329,19 @@ declare global {
             origin?: number | string | undefined | SignalLike<number | string | undefined>
             overflow?: number | string | undefined | SignalLike<number | string | undefined>
             overlinePosition?: number | string | undefined | SignalLike<number | string | undefined>
-            "overline-position"?: number | string | undefined | SignalLike<number | string | undefined>
+            'overline-position'?: number | string | undefined | SignalLike<number | string | undefined>
             overlineThickness?: number | string | undefined | SignalLike<number | string | undefined>
-            "overline-thickness"?: number | string | undefined | SignalLike<number | string | undefined>
+            'overline-thickness'?: number | string | undefined | SignalLike<number | string | undefined>
             paintOrder?: number | string | undefined | SignalLike<number | string | undefined>
-            "paint-order"?: number | string | undefined | SignalLike<number | string | undefined>
+            'paint-order'?: number | string | undefined | SignalLike<number | string | undefined>
             panose1?: number | string | undefined | SignalLike<number | string | undefined>
-            "panose-1"?: number | string | undefined | SignalLike<number | string | undefined>
+            'panose-1'?: number | string | undefined | SignalLike<number | string | undefined>
             pathLength?: number | string | undefined | SignalLike<number | string | undefined>
             patternContentUnits?: string | undefined | SignalLike<string | undefined>
             patternTransform?: number | string | undefined | SignalLike<number | string | undefined>
             patternUnits?: string | undefined | SignalLike<string | undefined>
             pointerEvents?: number | string | undefined | SignalLike<number | string | undefined>
-            "pointer-events"?: number | string | undefined | SignalLike<number | string | undefined>
+            'pointer-events'?: number | string | undefined | SignalLike<number | string | undefined>
             points?: string | undefined | SignalLike<string | undefined>
             pointsAtX?: number | string | undefined | SignalLike<number | string | undefined>
             pointsAtY?: number | string | undefined | SignalLike<number | string | undefined>
@@ -354,11 +354,11 @@ declare global {
             refX?: number | string | undefined | SignalLike<number | string | undefined>
             refY?: number | string | undefined | SignalLike<number | string | undefined>
             renderingIntent?: number | string | undefined | SignalLike<number | string | undefined>
-            "rendering-intent"?: number | string | undefined | SignalLike<number | string | undefined>
+            'rendering-intent'?: number | string | undefined | SignalLike<number | string | undefined>
             repeatCount?: number | string | undefined | SignalLike<number | string | undefined>
-            "repeat-count"?: number | string | undefined | SignalLike<number | string | undefined>
+            'repeat-count'?: number | string | undefined | SignalLike<number | string | undefined>
             repeatDur?: number | string | undefined | SignalLike<number | string | undefined>
-            "repeat-dur"?: number | string | undefined | SignalLike<number | string | undefined>
+            'repeat-dur'?: number | string | undefined | SignalLike<number | string | undefined>
             requiredExtensions?: number | string | undefined | SignalLike<number | string | undefined>
             requiredFeatures?: number | string | undefined | SignalLike<number | string | undefined>
             restart?: number | string | undefined | SignalLike<number | string | undefined>
@@ -369,7 +369,7 @@ declare global {
             scale?: number | string | undefined | SignalLike<number | string | undefined>
             seed?: number | string | undefined | SignalLike<number | string | undefined>
             shapeRendering?: number | string | undefined | SignalLike<number | string | undefined>
-            "shape-rendering"?: number | string | undefined | SignalLike<number | string | undefined>
+            'shape-rendering'?: number | string | undefined | SignalLike<number | string | undefined>
             slope?: number | string | undefined | SignalLike<number | string | undefined>
             spacing?: number | string | undefined | SignalLike<number | string | undefined>
             specularConstant?: number | string | undefined | SignalLike<number | string | undefined>
@@ -382,62 +382,62 @@ declare global {
             stemv?: number | string | undefined | SignalLike<number | string | undefined>
             stitchTiles?: number | string | undefined | SignalLike<number | string | undefined>
             stopColor?: string | undefined | SignalLike<string | undefined>
-            "stop-color"?: string | undefined | SignalLike<string | undefined>
+            'stop-color'?: string | undefined | SignalLike<string | undefined>
             stopOpacity?: number | string | undefined | SignalLike<number | string | undefined>
-            "stop-opacity"?: number | string | undefined | SignalLike<number | string | undefined>
+            'stop-opacity'?: number | string | undefined | SignalLike<number | string | undefined>
             strikethroughPosition?: number | string | undefined | SignalLike<number | string | undefined>
-            "strikethrough-position"?: number | string | undefined | SignalLike<number | string | undefined>
+            'strikethrough-position'?: number | string | undefined | SignalLike<number | string | undefined>
             strikethroughThickness?: number | string | undefined | SignalLike<number | string | undefined>
-            "strikethrough-thickness"?: number | string | undefined | SignalLike<number | string | undefined>
+            'strikethrough-thickness'?: number | string | undefined | SignalLike<number | string | undefined>
             string?: number | string | undefined | SignalLike<number | string | undefined>
             stroke?: string | undefined | SignalLike<string | undefined>
             strokeDasharray?: string | number | undefined | SignalLike<number | string | undefined>
-            "stroke-dasharray"?: string | number | undefined | SignalLike<number | string | undefined>
+            'stroke-dasharray'?: string | number | undefined | SignalLike<number | string | undefined>
             strokeDashoffset?: string | number | undefined | SignalLike<number | string | undefined>
-            "stroke-dashoffset"?: string | number | undefined | SignalLike<number | string | undefined>
+            'stroke-dashoffset'?: string | number | undefined | SignalLike<number | string | undefined>
             strokeLinecap?:
-            | "butt"
-            | "round"
-            | "square"
-            | "inherit"
-            | undefined
-            | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
-            "stroke-linecap"?:
-            | "butt"
-            | "round"
-            | "square"
-            | "inherit"
-            | undefined
-            | SignalLike<"butt" | "round" | "square" | "inherit" | undefined>
+                | 'butt'
+                | 'round'
+                | 'square'
+                | 'inherit'
+                | undefined
+                | SignalLike<'butt' | 'round' | 'square' | 'inherit' | undefined>
+            'stroke-linecap'?:
+                | 'butt'
+                | 'round'
+                | 'square'
+                | 'inherit'
+                | undefined
+                | SignalLike<'butt' | 'round' | 'square' | 'inherit' | undefined>
             strokeLinejoin?:
-            | "miter"
-            | "round"
-            | "bevel"
-            | "inherit"
-            | undefined
-            | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
-            "stroke-linejoin"?:
-            | "miter"
-            | "round"
-            | "bevel"
-            | "inherit"
-            | undefined
-            | SignalLike<"miter" | "round" | "bevel" | "inherit" | undefined>
+                | 'miter'
+                | 'round'
+                | 'bevel'
+                | 'inherit'
+                | undefined
+                | SignalLike<'miter' | 'round' | 'bevel' | 'inherit' | undefined>
+            'stroke-linejoin'?:
+                | 'miter'
+                | 'round'
+                | 'bevel'
+                | 'inherit'
+                | undefined
+                | SignalLike<'miter' | 'round' | 'bevel' | 'inherit' | undefined>
             strokeMiterlimit?: string | number | undefined | SignalLike<number | string | undefined>
-            "stroke-miterlimit"?: string | number | undefined | SignalLike<number | string | undefined>
+            'stroke-miterlimit'?: string | number | undefined | SignalLike<number | string | undefined>
             strokeOpacity?: number | string | undefined | SignalLike<number | string | undefined>
-            "stroke-opacity"?: number | string | undefined | SignalLike<number | string | undefined>
+            'stroke-opacity'?: number | string | undefined | SignalLike<number | string | undefined>
             strokeWidth?: number | string | undefined | SignalLike<number | string | undefined>
-            "stroke-width"?: number | string | undefined | SignalLike<number | string | undefined>
+            'stroke-width'?: number | string | undefined | SignalLike<number | string | undefined>
             surfaceScale?: number | string | undefined | SignalLike<number | string | undefined>
             systemLanguage?: number | string | undefined | SignalLike<number | string | undefined>
             tableValues?: number | string | undefined | SignalLike<number | string | undefined>
             targetX?: number | string | undefined | SignalLike<number | string | undefined>
             targetY?: number | string | undefined | SignalLike<number | string | undefined>
             textAnchor?: string | undefined | SignalLike<string | undefined>
-            "text-anchor"?: string | undefined | SignalLike<string | undefined>
+            'text-anchor'?: string | undefined | SignalLike<string | undefined>
             textDecoration?: number | string | undefined | SignalLike<number | string | undefined>
-            "text-decoration"?: number | string | undefined | SignalLike<number | string | undefined>
+            'text-decoration'?: number | string | undefined | SignalLike<number | string | undefined>
             textLength?: number | string | undefined | SignalLike<number | string | undefined>
             textRendering?: number | string | undefined | SignalLike<number | string | undefined>
             to?: number | string | undefined | SignalLike<number | string | undefined>
@@ -445,70 +445,70 @@ declare global {
             u1?: number | string | undefined | SignalLike<number | string | undefined>
             u2?: number | string | undefined | SignalLike<number | string | undefined>
             underlinePosition?: number | string | undefined | SignalLike<number | string | undefined>
-            "underline-position"?: number | string | undefined | SignalLike<number | string | undefined>
+            'underline-position'?: number | string | undefined | SignalLike<number | string | undefined>
             underlineThickness?: number | string | undefined | SignalLike<number | string | undefined>
-            "underline-thickness"?: number | string | undefined | SignalLike<number | string | undefined>
+            'underline-thickness'?: number | string | undefined | SignalLike<number | string | undefined>
             unicode?: number | string | undefined | SignalLike<number | string | undefined>
             unicodeBidi?: number | string | undefined | SignalLike<number | string | undefined>
-            "unicode-bidi"?: number | string | undefined | SignalLike<number | string | undefined>
+            'unicode-bidi'?: number | string | undefined | SignalLike<number | string | undefined>
             unicodeRange?: number | string | undefined | SignalLike<number | string | undefined>
-            "unicode-range"?: number | string | undefined | SignalLike<number | string | undefined>
+            'unicode-range'?: number | string | undefined | SignalLike<number | string | undefined>
             unitsPerEm?: number | string | undefined | SignalLike<number | string | undefined>
-            "units-per-em"?: number | string | undefined | SignalLike<number | string | undefined>
+            'units-per-em'?: number | string | undefined | SignalLike<number | string | undefined>
             vAlphabetic?: number | string | undefined | SignalLike<number | string | undefined>
-            "v-alphabetic"?: number | string | undefined | SignalLike<number | string | undefined>
+            'v-alphabetic'?: number | string | undefined | SignalLike<number | string | undefined>
             values?: string | undefined | SignalLike<string | undefined>
             vectorEffect?: number | string | undefined | SignalLike<number | string | undefined>
-            "vector-effect"?: number | string | undefined | SignalLike<number | string | undefined>
+            'vector-effect'?: number | string | undefined | SignalLike<number | string | undefined>
             version?: string | undefined | SignalLike<string | undefined>
             vertAdvY?: number | string | undefined | SignalLike<number | string | undefined>
-            "vert-adv-y"?: number | string | undefined | SignalLike<number | string | undefined>
+            'vert-adv-y'?: number | string | undefined | SignalLike<number | string | undefined>
             vertOriginX?: number | string | undefined | SignalLike<number | string | undefined>
-            "vert-origin-x"?: number | string | undefined | SignalLike<number | string | undefined>
+            'vert-origin-x'?: number | string | undefined | SignalLike<number | string | undefined>
             vertOriginY?: number | string | undefined | SignalLike<number | string | undefined>
-            "vert-origin-y"?: number | string | undefined | SignalLike<number | string | undefined>
+            'vert-origin-y'?: number | string | undefined | SignalLike<number | string | undefined>
             vHanging?: number | string | undefined | SignalLike<number | string | undefined>
-            "v-hanging"?: number | string | undefined | SignalLike<number | string | undefined>
+            'v-hanging'?: number | string | undefined | SignalLike<number | string | undefined>
             vIdeographic?: number | string | undefined | SignalLike<number | string | undefined>
-            "v-ideographic"?: number | string | undefined | SignalLike<number | string | undefined>
+            'v-ideographic'?: number | string | undefined | SignalLike<number | string | undefined>
             viewBox?: string | undefined | SignalLike<string | undefined>
             viewTarget?: number | string | undefined | SignalLike<number | string | undefined>
             visibility?: number | string | undefined | SignalLike<number | string | undefined>
             vMathematical?: number | string | undefined | SignalLike<number | string | undefined>
-            "v-mathematical"?: number | string | undefined | SignalLike<number | string | undefined>
+            'v-mathematical'?: number | string | undefined | SignalLike<number | string | undefined>
             widths?: number | string | undefined | SignalLike<number | string | undefined>
             wordSpacing?: number | string | undefined | SignalLike<number | string | undefined>
-            "word-spacing"?: number | string | undefined | SignalLike<number | string | undefined>
+            'word-spacing'?: number | string | undefined | SignalLike<number | string | undefined>
             writingMode?: number | string | undefined | SignalLike<number | string | undefined>
-            "writing-mode"?: number | string | undefined | SignalLike<number | string | undefined>
+            'writing-mode'?: number | string | undefined | SignalLike<number | string | undefined>
             x1?: number | string | undefined | SignalLike<number | string | undefined>
             x2?: number | string | undefined | SignalLike<number | string | undefined>
             x?: number | string | undefined | SignalLike<number | string | undefined>
             xChannelSelector?: string | undefined | SignalLike<string | undefined>
             xHeight?: number | string | undefined | SignalLike<number | string | undefined>
-            "x-height"?: number | string | undefined | SignalLike<number | string | undefined>
+            'x-height'?: number | string | undefined | SignalLike<number | string | undefined>
             xlinkActuate?: string | undefined | SignalLike<string | undefined>
-            "xlink:actuate"?: SVGAttributes["xlinkActuate"]
+            'xlink:actuate'?: SVGAttributes['xlinkActuate']
             xlinkArcrole?: string | undefined | SignalLike<string | undefined>
-            "xlink:arcrole"?: string | undefined | SignalLike<string | undefined>
+            'xlink:arcrole'?: string | undefined | SignalLike<string | undefined>
             xlinkHref?: string | undefined | SignalLike<string | undefined>
-            "xlink:href"?: string | undefined | SignalLike<string | undefined>
+            'xlink:href'?: string | undefined | SignalLike<string | undefined>
             xlinkRole?: string | undefined | SignalLike<string | undefined>
-            "xlink:role"?: string | undefined | SignalLike<string | undefined>
+            'xlink:role'?: string | undefined | SignalLike<string | undefined>
             xlinkShow?: string | undefined | SignalLike<string | undefined>
-            "xlink:show"?: string | undefined | SignalLike<string | undefined>
+            'xlink:show'?: string | undefined | SignalLike<string | undefined>
             xlinkTitle?: string | undefined | SignalLike<string | undefined>
-            "xlink:title"?: string | undefined | SignalLike<string | undefined>
+            'xlink:title'?: string | undefined | SignalLike<string | undefined>
             xlinkType?: string | undefined | SignalLike<string | undefined>
-            "xlink:type"?: string | undefined | SignalLike<string | undefined>
+            'xlink:type'?: string | undefined | SignalLike<string | undefined>
             xmlBase?: string | undefined | SignalLike<string | undefined>
-            "xml:base"?: string | undefined | SignalLike<string | undefined>
+            'xml:base'?: string | undefined | SignalLike<string | undefined>
             xmlLang?: string | undefined | SignalLike<string | undefined>
-            "xml:lang"?: string | undefined | SignalLike<string | undefined>
+            'xml:lang'?: string | undefined | SignalLike<string | undefined>
             xmlns?: string | undefined | SignalLike<string | undefined>
             xmlnsXlink?: string | undefined | SignalLike<string | undefined>
             xmlSpace?: string | undefined | SignalLike<string | undefined>
-            "xml:space"?: string | undefined | SignalLike<string | undefined>
+            'xml:space'?: string | undefined | SignalLike<string | undefined>
             y1?: number | string | undefined | SignalLike<number | string | undefined>
             y2?: number | string | undefined | SignalLike<number | string | undefined>
             y?: number | string | undefined | SignalLike<number | string | undefined>
@@ -523,7 +523,7 @@ declare global {
 
         export type TargetedEvent<Target extends EventTarget = EventTarget, TypedEvent extends Event = Event> = Omit<
             TypedEvent,
-            "currentTarget"
+            'currentTarget'
         > & {
             readonly currentTarget: Target
         }
@@ -549,7 +549,7 @@ declare global {
 
         export type EventHandler<E extends TargetedEvent> = {
             bivarianceHack(event: E): void
-        }["bivarianceHack"]
+        }['bivarianceHack']
 
         export type AnimationEventHandler<Target extends EventTarget> = EventHandler<TargetedAnimationEvent<Target>>
         export type ClipboardEventHandler<Target extends EventTarget> = EventHandler<TargetedClipboardEvent<Target>>
@@ -794,346 +794,346 @@ declare global {
         // All the WAI-ARIA 1.1 attributes from https://www.w3.org/TR/wai-aria-1.1/
         export interface AriaAttributes {
             /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
-            "aria-activedescendant"?: Signalish<string | undefined>
+            'aria-activedescendant'?: Signalish<string | undefined>
             /** Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. */
-            "aria-atomic"?: Signalish<Booleanish | undefined>
+            'aria-atomic'?: Signalish<Booleanish | undefined>
             /**
              * Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be
              * presented if they are made.
              */
-            "aria-autocomplete"?: Signalish<"none" | "inline" | "list" | "both" | undefined>
+            'aria-autocomplete'?: Signalish<'none' | 'inline' | 'list' | 'both' | undefined>
             /**
              * Defines a string value that labels the current element, which is intended to be converted into Braille.
              * @see aria-label.
              */
-            "aria-braillelabel"?: Signalish<string | undefined>
+            'aria-braillelabel'?: Signalish<string | undefined>
             /**
              * Defines a human-readable, author-localized abbreviated description for the role of an element, which is intended to be converted into Braille.
              * @see aria-roledescription.
              */
-            "aria-brailleroledescription"?: Signalish<string | undefined>
+            'aria-brailleroledescription'?: Signalish<string | undefined>
             /** Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. */
-            "aria-busy"?: Signalish<Booleanish | undefined>
+            'aria-busy'?: Signalish<Booleanish | undefined>
             /**
              * Indicates the current "checked" state of checkboxes, radio buttons, and other widgets.
              * @see aria-pressed
              * @see aria-selected.
              */
-            "aria-checked"?: Signalish<Booleanish | "mixed" | undefined>
+            'aria-checked'?: Signalish<Booleanish | 'mixed' | undefined>
             /**
              * Defines the total number of columns in a table, grid, or treegrid.
              * @see aria-colindex.
              */
-            "aria-colcount"?: Signalish<number | undefined>
+            'aria-colcount'?: Signalish<number | undefined>
             /**
              * Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.
              * @see aria-colcount
              * @see aria-colspan.
              */
-            "aria-colindex"?: Signalish<number | undefined>
+            'aria-colindex'?: Signalish<number | undefined>
             /**
              * Defines a human readable text alternative of aria-colindex.
              * @see aria-rowindextext.
              */
-            "aria-colindextext"?: Signalish<string | undefined>
+            'aria-colindextext'?: Signalish<string | undefined>
             /**
              * Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.
              * @see aria-colindex
              * @see aria-rowspan.
              */
-            "aria-colspan"?: Signalish<number | undefined>
+            'aria-colspan'?: Signalish<number | undefined>
             /**
              * Identifies the element (or elements) whose contents or presence are controlled by the current element.
              * @see aria-owns.
              */
-            "aria-controls"?: Signalish<string | undefined>
+            'aria-controls'?: Signalish<string | undefined>
             /** Indicates the element that represents the current item within a container or set of related elements. */
-            "aria-current"?: Signalish<Booleanish | "page" | "step" | "location" | "date" | "time" | undefined>
+            'aria-current'?: Signalish<Booleanish | 'page' | 'step' | 'location' | 'date' | 'time' | undefined>
             /**
              * Identifies the element (or elements) that describes the object.
              * @see aria-labelledby
              */
-            "aria-describedby"?: Signalish<string | undefined>
+            'aria-describedby'?: Signalish<string | undefined>
             /**
              * Defines a string value that describes or annotates the current element.
              * @see related aria-describedby.
              */
-            "aria-description"?: Signalish<string | undefined>
+            'aria-description'?: Signalish<string | undefined>
             /**
              * Identifies the element that provides a detailed, extended description for the object.
              * @see aria-describedby.
              */
-            "aria-details"?: Signalish<string | undefined>
+            'aria-details'?: Signalish<string | undefined>
             /**
              * Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
              * @see aria-hidden
              * @see aria-readonly.
              */
-            "aria-disabled"?: Signalish<Booleanish | undefined>
+            'aria-disabled'?: Signalish<Booleanish | undefined>
             /**
              * Indicates what functions can be performed when a dragged object is released on the drop target.
              * @deprecated in ARIA 1.1
              */
-            "aria-dropeffect"?: Signalish<"none" | "copy" | "execute" | "link" | "move" | "popup" | undefined>
+            'aria-dropeffect'?: Signalish<'none' | 'copy' | 'execute' | 'link' | 'move' | 'popup' | undefined>
             /**
              * Identifies the element that provides an error message for the object.
              * @see aria-invalid
              * @see aria-describedby.
              */
-            "aria-errormessage"?: Signalish<string | undefined>
+            'aria-errormessage'?: Signalish<string | undefined>
             /** Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. */
-            "aria-expanded"?: Signalish<Booleanish | undefined>
+            'aria-expanded'?: Signalish<Booleanish | undefined>
             /**
              * Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion,
              * allows assistive technology to override the general default of reading in document source order.
              */
-            "aria-flowto"?: Signalish<string | undefined>
+            'aria-flowto'?: Signalish<string | undefined>
             /**
              * Indicates an element's "grabbed" state in a drag-and-drop operation.
              * @deprecated in ARIA 1.1
              */
-            "aria-grabbed"?: Signalish<Booleanish | undefined>
+            'aria-grabbed'?: Signalish<Booleanish | undefined>
             /** Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. */
-            "aria-haspopup"?: Signalish<Booleanish | "menu" | "listbox" | "tree" | "grid" | "dialog" | undefined>
+            'aria-haspopup'?: Signalish<Booleanish | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | undefined>
             /**
              * Indicates whether the element is exposed to an accessibility API.
              * @see aria-disabled.
              */
-            "aria-hidden"?: Signalish<Booleanish | undefined>
+            'aria-hidden'?: Signalish<Booleanish | undefined>
             /**
              * Indicates the entered value does not conform to the format expected by the application.
              * @see aria-errormessage.
              */
-            "aria-invalid"?: Signalish<Booleanish | "grammar" | "spelling" | undefined>
+            'aria-invalid'?: Signalish<Booleanish | 'grammar' | 'spelling' | undefined>
             /** Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. */
-            "aria-keyshortcuts"?: Signalish<string | undefined>
+            'aria-keyshortcuts'?: Signalish<string | undefined>
             /**
              * Defines a string value that labels the current element.
              * @see aria-labelledby.
              */
-            "aria-label"?: Signalish<string | undefined>
+            'aria-label'?: Signalish<string | undefined>
             /**
              * Identifies the element (or elements) that labels the current element.
              * @see aria-describedby.
              */
-            "aria-labelledby"?: Signalish<string | undefined>
+            'aria-labelledby'?: Signalish<string | undefined>
             /** Defines the hierarchical level of an element within a structure. */
-            "aria-level"?: Signalish<number | undefined>
+            'aria-level'?: Signalish<number | undefined>
             /** Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. */
-            "aria-live"?: Signalish<"off" | "assertive" | "polite" | undefined>
+            'aria-live'?: Signalish<'off' | 'assertive' | 'polite' | undefined>
             /** Indicates whether an element is modal when displayed. */
-            "aria-modal"?: Signalish<Booleanish | undefined>
+            'aria-modal'?: Signalish<Booleanish | undefined>
             /** Indicates whether a text box accepts multiple lines of input or only a single line. */
-            "aria-multiline"?: Signalish<Booleanish | undefined>
+            'aria-multiline'?: Signalish<Booleanish | undefined>
             /** Indicates that the user may select more than one item from the current selectable descendants. */
-            "aria-multiselectable"?: Signalish<Booleanish | undefined>
+            'aria-multiselectable'?: Signalish<Booleanish | undefined>
             /** Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous. */
-            "aria-orientation"?: Signalish<"horizontal" | "vertical" | undefined>
+            'aria-orientation'?: Signalish<'horizontal' | 'vertical' | undefined>
             /**
              * Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship
              * between DOM elements where the DOM hierarchy cannot be used to represent the relationship.
              * @see aria-controls.
              */
-            "aria-owns"?: Signalish<string | undefined>
+            'aria-owns'?: Signalish<string | undefined>
             /**
              * Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value.
              * A hint could be a sample value or a brief description of the expected format.
              */
-            "aria-placeholder"?: Signalish<string | undefined>
+            'aria-placeholder'?: Signalish<string | undefined>
             /**
              * Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
              * @see aria-setsize.
              */
-            "aria-posinset"?: Signalish<number | undefined>
+            'aria-posinset'?: Signalish<number | undefined>
             /**
              * Indicates the current "pressed" state of toggle buttons.
              * @see aria-checked
              * @see aria-selected.
              */
-            "aria-pressed"?: Signalish<Booleanish | "mixed" | undefined>
+            'aria-pressed'?: Signalish<Booleanish | 'mixed' | undefined>
             /**
              * Indicates that the element is not editable, but is otherwise operable.
              * @see aria-disabled.
              */
-            "aria-readonly"?: Signalish<Booleanish | undefined>
+            'aria-readonly'?: Signalish<Booleanish | undefined>
             /**
              * Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
              * @see aria-atomic.
              */
-            "aria-relevant"?: Signalish<
-                | "additions"
-                | "additions removals"
-                | "additions text"
-                | "all"
-                | "removals"
-                | "removals additions"
-                | "removals text"
-                | "text"
-                | "text additions"
-                | "text removals"
+            'aria-relevant'?: Signalish<
+                | 'additions'
+                | 'additions removals'
+                | 'additions text'
+                | 'all'
+                | 'removals'
+                | 'removals additions'
+                | 'removals text'
+                | 'text'
+                | 'text additions'
+                | 'text removals'
                 | undefined
             >
             /** Indicates that user input is required on the element before a form may be submitted. */
-            "aria-required"?: Signalish<Booleanish | undefined>
+            'aria-required'?: Signalish<Booleanish | undefined>
             /** Defines a human-readable, author-localized description for the role of an element. */
-            "aria-roledescription"?: Signalish<string | undefined>
+            'aria-roledescription'?: Signalish<string | undefined>
             /**
              * Defines the total number of rows in a table, grid, or treegrid.
              * @see aria-rowindex.
              */
-            "aria-rowcount"?: Signalish<number | undefined>
+            'aria-rowcount'?: Signalish<number | undefined>
             /**
              * Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.
              * @see aria-rowcount
              * @see aria-rowspan.
              */
-            "aria-rowindex"?: Signalish<number | undefined>
+            'aria-rowindex'?: Signalish<number | undefined>
             /**
              * Defines a human readable text alternative of aria-rowindex.
              * @see aria-colindextext.
              */
-            "aria-rowindextext"?: Signalish<string | undefined>
+            'aria-rowindextext'?: Signalish<string | undefined>
             /**
              * Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.
              * @see aria-rowindex
              * @see aria-colspan.
              */
-            "aria-rowspan"?: Signalish<number | undefined>
+            'aria-rowspan'?: Signalish<number | undefined>
             /**
              * Indicates the current "selected" state of various widgets.
              * @see aria-checked
              * @see aria-pressed.
              */
-            "aria-selected"?: Signalish<Booleanish | undefined>
+            'aria-selected'?: Signalish<Booleanish | undefined>
             /**
              * Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
              * @see aria-posinset.
              */
-            "aria-setsize"?: Signalish<number | undefined>
+            'aria-setsize'?: Signalish<number | undefined>
             /** Indicates if items in a table or grid are sorted in ascending or descending order. */
-            "aria-sort"?: Signalish<"none" | "ascending" | "descending" | "other" | undefined>
+            'aria-sort'?: Signalish<'none' | 'ascending' | 'descending' | 'other' | undefined>
             /** Defines the maximum allowed value for a range widget. */
-            "aria-valuemax"?: Signalish<number | undefined>
+            'aria-valuemax'?: Signalish<number | undefined>
             /** Defines the minimum allowed value for a range widget. */
-            "aria-valuemin"?: Signalish<number | undefined>
+            'aria-valuemin'?: Signalish<number | undefined>
             /**
              * Defines the current value for a range widget.
              * @see aria-valuetext.
              */
-            "aria-valuenow"?: Signalish<number | undefined>
+            'aria-valuenow'?: Signalish<number | undefined>
             /** Defines the human readable text alternative of aria-valuenow for a range widget. */
-            "aria-valuetext"?: Signalish<string | undefined>
+            'aria-valuetext'?: Signalish<string | undefined>
         }
 
         // All the WAI-ARIA 1.2 role attribute values from https://www.w3.org/TR/wai-aria-1.2/#role_definitions
         type AriaRole =
-            | "alert"
-            | "alertdialog"
-            | "application"
-            | "article"
-            | "banner"
-            | "blockquote"
-            | "button"
-            | "caption"
-            | "cell"
-            | "checkbox"
-            | "code"
-            | "columnheader"
-            | "combobox"
-            | "command"
-            | "complementary"
-            | "composite"
-            | "contentinfo"
-            | "definition"
-            | "deletion"
-            | "dialog"
-            | "directory"
-            | "document"
-            | "emphasis"
-            | "feed"
-            | "figure"
-            | "form"
-            | "generic"
-            | "grid"
-            | "gridcell"
-            | "group"
-            | "heading"
-            | "img"
-            | "input"
-            | "insertion"
-            | "landmark"
-            | "link"
-            | "list"
-            | "listbox"
-            | "listitem"
-            | "log"
-            | "main"
-            | "marquee"
-            | "math"
-            | "meter"
-            | "menu"
-            | "menubar"
-            | "menuitem"
-            | "menuitemcheckbox"
-            | "menuitemradio"
-            | "navigation"
-            | "none"
-            | "note"
-            | "option"
-            | "paragraph"
-            | "presentation"
-            | "progressbar"
-            | "radio"
-            | "radiogroup"
-            | "range"
-            | "region"
-            | "roletype"
-            | "row"
-            | "rowgroup"
-            | "rowheader"
-            | "scrollbar"
-            | "search"
-            | "searchbox"
-            | "section"
-            | "sectionhead"
-            | "select"
-            | "separator"
-            | "slider"
-            | "spinbutton"
-            | "status"
-            | "strong"
-            | "structure"
-            | "subscript"
-            | "superscript"
-            | "switch"
-            | "tab"
-            | "table"
-            | "tablist"
-            | "tabpanel"
-            | "term"
-            | "textbox"
-            | "time"
-            | "timer"
-            | "toolbar"
-            | "tooltip"
-            | "tree"
-            | "treegrid"
-            | "treeitem"
-            | "widget"
-            | "window"
-            | "none presentation"
+            | 'alert'
+            | 'alertdialog'
+            | 'application'
+            | 'article'
+            | 'banner'
+            | 'blockquote'
+            | 'button'
+            | 'caption'
+            | 'cell'
+            | 'checkbox'
+            | 'code'
+            | 'columnheader'
+            | 'combobox'
+            | 'command'
+            | 'complementary'
+            | 'composite'
+            | 'contentinfo'
+            | 'definition'
+            | 'deletion'
+            | 'dialog'
+            | 'directory'
+            | 'document'
+            | 'emphasis'
+            | 'feed'
+            | 'figure'
+            | 'form'
+            | 'generic'
+            | 'grid'
+            | 'gridcell'
+            | 'group'
+            | 'heading'
+            | 'img'
+            | 'input'
+            | 'insertion'
+            | 'landmark'
+            | 'link'
+            | 'list'
+            | 'listbox'
+            | 'listitem'
+            | 'log'
+            | 'main'
+            | 'marquee'
+            | 'math'
+            | 'meter'
+            | 'menu'
+            | 'menubar'
+            | 'menuitem'
+            | 'menuitemcheckbox'
+            | 'menuitemradio'
+            | 'navigation'
+            | 'none'
+            | 'note'
+            | 'option'
+            | 'paragraph'
+            | 'presentation'
+            | 'progressbar'
+            | 'radio'
+            | 'radiogroup'
+            | 'range'
+            | 'region'
+            | 'roletype'
+            | 'row'
+            | 'rowgroup'
+            | 'rowheader'
+            | 'scrollbar'
+            | 'search'
+            | 'searchbox'
+            | 'section'
+            | 'sectionhead'
+            | 'select'
+            | 'separator'
+            | 'slider'
+            | 'spinbutton'
+            | 'status'
+            | 'strong'
+            | 'structure'
+            | 'subscript'
+            | 'superscript'
+            | 'switch'
+            | 'tab'
+            | 'table'
+            | 'tablist'
+            | 'tabpanel'
+            | 'term'
+            | 'textbox'
+            | 'time'
+            | 'timer'
+            | 'toolbar'
+            | 'tooltip'
+            | 'tree'
+            | 'treegrid'
+            | 'treeitem'
+            | 'widget'
+            | 'window'
+            | 'none presentation'
 
         export interface HTMLAttributes<RefType extends EventTarget = EventTarget>
             extends DOMAttributes<RefType>,
-            AriaAttributes,
-            ElementChildrenAttribute,
-            IntrinsicAttributes {
+                AriaAttributes,
+                ElementChildrenAttribute,
+                IntrinsicAttributes {
             // Standard HTML Attributes
             accept?: string | undefined | SignalLike<string | undefined>
             acceptCharset?: string | undefined | SignalLike<string | undefined>
-            "accept-charset"?: HTMLAttributes["acceptCharset"]
+            'accept-charset'?: HTMLAttributes['acceptCharset']
             accessKey?: string | undefined | SignalLike<string | undefined>
-            accesskey?: HTMLAttributes["accessKey"]
+            accesskey?: HTMLAttributes['accessKey']
             action?: string | undefined | SignalLike<string | undefined>
             allow?: string | undefined | SignalLike<string | undefined>
             allowFullScreen?: boolean | undefined | SignalLike<boolean | undefined>
@@ -1164,12 +1164,12 @@ declare global {
             colspan?: number | undefined | SignalLike<number | undefined>
             content?: string | undefined | SignalLike<string | undefined>
             contentEditable?:
-            | Booleanish
-            | ""
-            | "plaintext-only"
-            | undefined
-            | SignalLike<Booleanish | "" | "plaintext-only" | undefined>
-            contenteditable?: HTMLAttributes["contentEditable"]
+                | Booleanish
+                | ''
+                | 'plaintext-only'
+                | undefined
+                | SignalLike<Booleanish | '' | 'plaintext-only' | undefined>
+            contenteditable?: HTMLAttributes['contentEditable']
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contextmenu */
             contextMenu?: string | undefined | SignalLike<string | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contextmenu */
@@ -1186,26 +1186,26 @@ declare global {
             defaultChecked?: boolean | undefined | SignalLike<boolean | undefined>
             defaultValue?: string | undefined | SignalLike<string | undefined>
             defer?: boolean | undefined | SignalLike<boolean | undefined>
-            dir?: "auto" | "rtl" | "ltr" | undefined | SignalLike<"auto" | "rtl" | "ltr" | undefined>
+            dir?: 'auto' | 'rtl' | 'ltr' | undefined | SignalLike<'auto' | 'rtl' | 'ltr' | undefined>
             disabled?: boolean | undefined | SignalLike<boolean | undefined>
             disableRemotePlayback?: boolean | undefined | SignalLike<boolean | undefined>
             download?: any | undefined
-            decoding?: "sync" | "async" | "auto" | undefined | SignalLike<"sync" | "async" | "auto" | undefined>
+            decoding?: 'sync' | 'async' | 'auto' | undefined | SignalLike<'sync' | 'async' | 'auto' | undefined>
             draggable?: boolean | undefined | SignalLike<boolean | undefined>
             encType?: string | undefined | SignalLike<string | undefined>
             enctype?: string | undefined | SignalLike<string | undefined>
             enterkeyhint?:
-            | "enter"
-            | "done"
-            | "go"
-            | "next"
-            | "previous"
-            | "search"
-            | "send"
-            | undefined
-            | SignalLike<"enter" | "done" | "go" | "next" | "previous" | "search" | "send" | undefined>
+                | 'enter'
+                | 'done'
+                | 'go'
+                | 'next'
+                | 'previous'
+                | 'search'
+                | 'send'
+                | undefined
+                | SignalLike<'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send' | undefined>
             elementTiming?: string | undefined | SignalLike<string | undefined>
-            elementtiming?: HTMLAttributes["elementTiming"]
+            elementtiming?: HTMLAttributes['elementTiming']
             exportparts?: string | undefined | SignalLike<string | undefined>
             for?: string | undefined | SignalLike<string | undefined>
             form?: string | undefined | SignalLike<string | undefined>
@@ -1224,18 +1224,18 @@ declare global {
             headers?: string | undefined | SignalLike<string | undefined>
             height?: number | string | undefined | SignalLike<number | string | undefined>
             hidden?:
-            | boolean
-            | "hidden"
-            | "until-found"
-            | undefined
-            | SignalLike<boolean | "hidden" | "until-found" | undefined>
+                | boolean
+                | 'hidden'
+                | 'until-found'
+                | undefined
+                | SignalLike<boolean | 'hidden' | 'until-found' | undefined>
             high?: number | undefined | SignalLike<number | undefined>
             href?: string | undefined | SignalLike<string | undefined>
             hrefLang?: string | undefined | SignalLike<string | undefined>
             hreflang?: string | undefined | SignalLike<string | undefined>
             htmlFor?: string | undefined | SignalLike<string | undefined>
             httpEquiv?: string | undefined | SignalLike<string | undefined>
-            "http-equiv"?: string | undefined | SignalLike<string | undefined>
+            'http-equiv'?: string | undefined | SignalLike<string | undefined>
             icon?: string | undefined | SignalLike<string | undefined>
             id?: string | undefined | SignalLike<string | undefined>
             indeterminate?: boolean | undefined | SignalLike<boolean | undefined>
@@ -1250,7 +1250,7 @@ declare global {
             label?: string | undefined | SignalLike<string | undefined>
             lang?: string | undefined | SignalLike<string | undefined>
             list?: string | undefined | SignalLike<string | undefined>
-            loading?: "eager" | "lazy" | undefined | SignalLike<"eager" | "lazy" | undefined>
+            loading?: 'eager' | 'lazy' | undefined | SignalLike<'eager' | 'lazy' | undefined>
             loop?: boolean | undefined | SignalLike<boolean | undefined>
             low?: number | undefined | SignalLike<number | undefined>
             manifest?: string | undefined | SignalLike<string | undefined>
@@ -1286,26 +1286,26 @@ declare global {
             readonly?: boolean | undefined | SignalLike<boolean | undefined>
             readOnly?: boolean | undefined | SignalLike<boolean | undefined>
             referrerpolicy?:
-            | "no-referrer"
-            | "no-referrer-when-downgrade"
-            | "origin"
-            | "origin-when-cross-origin"
-            | "same-origin"
-            | "strict-origin"
-            | "strict-origin-when-cross-origin"
-            | "unsafe-url"
-            | undefined
-            | SignalLike<
-                | "no-referrer"
-                | "no-referrer-when-downgrade"
-                | "origin"
-                | "origin-when-cross-origin"
-                | "same-origin"
-                | "strict-origin"
-                | "strict-origin-when-cross-origin"
-                | "unsafe-url"
+                | 'no-referrer'
+                | 'no-referrer-when-downgrade'
+                | 'origin'
+                | 'origin-when-cross-origin'
+                | 'same-origin'
+                | 'strict-origin'
+                | 'strict-origin-when-cross-origin'
+                | 'unsafe-url'
                 | undefined
-            >
+                | SignalLike<
+                      | 'no-referrer'
+                      | 'no-referrer-when-downgrade'
+                      | 'origin'
+                      | 'origin-when-cross-origin'
+                      | 'same-origin'
+                      | 'strict-origin'
+                      | 'strict-origin-when-cross-origin'
+                      | 'unsafe-url'
+                      | undefined
+                  >
             rel?: string | undefined | SignalLike<string | undefined>
             required?: boolean | undefined | SignalLike<boolean | undefined>
             reversed?: boolean | undefined | SignalLike<boolean | undefined>
@@ -1352,26 +1352,26 @@ declare global {
 
             // Non-standard Attributes
             autocapitalize?:
-            | "off"
-            | "none"
-            | "on"
-            | "sentences"
-            | "words"
-            | "characters"
-            | undefined
-            | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
+                | 'off'
+                | 'none'
+                | 'on'
+                | 'sentences'
+                | 'words'
+                | 'characters'
+                | undefined
+                | SignalLike<'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters' | undefined>
             autoCapitalize?:
-            | "off"
-            | "none"
-            | "on"
-            | "sentences"
-            | "words"
-            | "characters"
-            | undefined
-            | SignalLike<"off" | "none" | "on" | "sentences" | "words" | "characters" | undefined>
+                | 'off'
+                | 'none'
+                | 'on'
+                | 'sentences'
+                | 'words'
+                | 'characters'
+                | undefined
+                | SignalLike<'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters' | undefined>
             disablePictureInPicture?: boolean | undefined | SignalLike<boolean | undefined>
             results?: number | undefined | SignalLike<number | undefined>
-            translate?: "yes" | "no" | undefined | SignalLike<"yes" | "no" | undefined>
+            translate?: 'yes' | 'no' | undefined | SignalLike<'yes' | 'no' | undefined>
 
             // RDFa Attributes
             about?: string | undefined | SignalLike<string | undefined>
@@ -1403,19 +1403,19 @@ declare global {
 
         export interface HTMLMarqueeElement extends HTMLElement {
             behavior?:
-            | "scroll"
-            | "slide"
-            | "alternate"
-            | undefined
-            | SignalLike<"scroll" | "slide" | "alternate" | undefined>
+                | 'scroll'
+                | 'slide'
+                | 'alternate'
+                | undefined
+                | SignalLike<'scroll' | 'slide' | 'alternate' | undefined>
             bgColor?: string | undefined | SignalLike<string | undefined>
             direction?:
-            | "left"
-            | "right"
-            | "up"
-            | "down"
-            | undefined
-            | SignalLike<"left" | "right" | "up" | "down" | undefined>
+                | 'left'
+                | 'right'
+                | 'up'
+                | 'down'
+                | undefined
+                | SignalLike<'left' | 'right' | 'up' | 'down' | undefined>
             height?: number | string | undefined | SignalLike<number | string | undefined>
             hspace?: number | string | undefined | SignalLike<number | string | undefined>
             loop?: number | string | undefined | SignalLike<number | string | undefined>
@@ -1427,7 +1427,7 @@ declare global {
         }
 
         export interface MathMLAttributes<Target extends EventTarget = MathMLElement> extends HTMLAttributes<Target> {
-            dir?: "auto" | "ltr" | "rtl" | undefined | SignalLike<"auto" | "ltr" | "rtl" | undefined>
+            dir?: 'auto' | 'ltr' | 'rtl' | undefined | SignalLike<'auto' | 'ltr' | 'rtl' | undefined>
             displaystyle?: boolean | undefined | SignalLike<boolean | undefined>
             /** @deprecated This feature is non-standard. See https://developer.mozilla.org/en-US/docs/Web/MathML/Global_attributes/href  */
             href?: string | undefined | SignalLike<string | undefined>
@@ -1455,20 +1455,20 @@ declare global {
 
         export interface HTMLMActionElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/maction#actiontype */
-            actiontype?: "statusline" | "toggle" | undefined | SignalLike<"statusline" | "toggle" | undefined>
+            actiontype?: 'statusline' | 'toggle' | undefined | SignalLike<'statusline' | 'toggle' | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/maction#selection */
             selection?: string | undefined | SignalLike<string | undefined>
         }
 
         export interface HTMLMathElement extends MathMLElement {
-            display?: "block" | "inline" | undefined | SignalLike<"block" | "inline" | undefined>
+            display?: 'block' | 'inline' | undefined | SignalLike<'block' | 'inline' | undefined>
         }
 
         export interface HTMLMEncloseElement extends MathMLElement {
             notation?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMErrorElement extends MathMLElement { }
+        export interface HTMLMErrorElement extends MathMLElement {}
 
         export interface HTMLMFencedElement extends MathMLElement {
             close?: string | undefined | SignalLike<string | undefined>
@@ -1478,56 +1478,56 @@ declare global {
 
         export interface HTMLMFracElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mfrac#denomalign */
-            denomalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
+            denomalign?: 'center' | 'left' | 'right' | undefined | SignalLike<'center' | 'left' | 'right' | undefined>
             linethickness?: string | undefined | SignalLike<string | undefined>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mfrac#numalign */
-            numalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
+            numalign?: 'center' | 'left' | 'right' | undefined | SignalLike<'center' | 'left' | 'right' | undefined>
         }
 
         export interface HTMLMiElement extends MathMLElement {
             /** The only value allowed in the current specification is normal (case insensitive)
              * See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mi#mathvariant */
             mathvariant?:
-            | "normal"
-            | "bold"
-            | "italic"
-            | "bold-italic"
-            | "double-struck"
-            | "bold-fraktur"
-            | "script"
-            | "bold-script"
-            | "fraktur"
-            | "sans-serif"
-            | "bold-sans-serif"
-            | "sans-serif-italic"
-            | "sans-serif-bold-italic"
-            | "monospace"
-            | "initial"
-            | "tailed"
-            | "looped"
-            | "stretched"
-            | undefined
-            | SignalLike<
-                | "normal"
-                | "bold"
-                | "italic"
-                | "bold-italic"
-                | "double-struck"
-                | "bold-fraktur"
-                | "script"
-                | "bold-script"
-                | "fraktur"
-                | "sans-serif"
-                | "bold-sans-serif"
-                | "sans-serif-italic"
-                | "sans-serif-bold-italic"
-                | "monospace"
-                | "initial"
-                | "tailed"
-                | "looped"
-                | "stretched"
+                | 'normal'
+                | 'bold'
+                | 'italic'
+                | 'bold-italic'
+                | 'double-struck'
+                | 'bold-fraktur'
+                | 'script'
+                | 'bold-script'
+                | 'fraktur'
+                | 'sans-serif'
+                | 'bold-sans-serif'
+                | 'sans-serif-italic'
+                | 'sans-serif-bold-italic'
+                | 'monospace'
+                | 'initial'
+                | 'tailed'
+                | 'looped'
+                | 'stretched'
                 | undefined
-            >
+                | SignalLike<
+                      | 'normal'
+                      | 'bold'
+                      | 'italic'
+                      | 'bold-italic'
+                      | 'double-struck'
+                      | 'bold-fraktur'
+                      | 'script'
+                      | 'bold-script'
+                      | 'fraktur'
+                      | 'sans-serif'
+                      | 'bold-sans-serif'
+                      | 'sans-serif-italic'
+                      | 'sans-serif-bold-italic'
+                      | 'monospace'
+                      | 'initial'
+                      | 'tailed'
+                      | 'looped'
+                      | 'stretched'
+                      | undefined
+                  >
         }
 
         export interface HTMLMmultiScriptsElement extends MathMLElement {
@@ -1537,7 +1537,7 @@ declare global {
             superscriptshift?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMNElement extends MathMLElement { }
+        export interface HTMLMNElement extends MathMLElement {}
 
         export interface HTMLMOElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mo#accent */
@@ -1566,13 +1566,13 @@ declare global {
             width?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMPhantomElement extends MathMLElement { }
+        export interface HTMLMPhantomElement extends MathMLElement {}
 
-        export interface HTMLMPrescriptsElement extends MathMLElement { }
+        export interface HTMLMPrescriptsElement extends MathMLElement {}
 
-        export interface HTMLMRootElement extends MathMLElement { }
+        export interface HTMLMRootElement extends MathMLElement {}
 
-        export interface HTMLMRowElement extends MathMLElement { }
+        export interface HTMLMRowElement extends MathMLElement {}
 
         export interface HTMLMSElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/ms#browser_compatibility */
@@ -1587,7 +1587,7 @@ declare global {
             width?: string | undefined | SignalLike<string | undefined>
         }
 
-        export interface HTMLMSqrtElement extends MathMLElement { }
+        export interface HTMLMSqrtElement extends MathMLElement {}
 
         export interface HTMLMStyleElement extends MathMLElement {
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mstyle#background */
@@ -1626,34 +1626,34 @@ declare global {
         export interface HTMLMTableElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#align */
             align?:
-            | "axis"
-            | "baseline"
-            | "bottom"
-            | "center"
-            | "top"
-            | undefined
-            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+                | 'axis'
+                | 'baseline'
+                | 'bottom'
+                | 'center'
+                | 'top'
+                | undefined
+                | SignalLike<'axis' | 'baseline' | 'bottom' | 'center' | 'top' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#columnalign */
-            columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
+            columnalign?: 'center' | 'left' | 'right' | undefined | SignalLike<'center' | 'left' | 'right' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#columnlines */
-            columnlines?: "dashed" | "none" | "solid" | undefined | SignalLike<"dashed" | "none" | "solid" | undefined>
+            columnlines?: 'dashed' | 'none' | 'solid' | undefined | SignalLike<'dashed' | 'none' | 'solid' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#columnspacing */
             columnspacing?: string | undefined | SignalLike<string | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#frame */
-            frame?: "dashed" | "none" | "solid" | undefined | SignalLike<"dashed" | "none" | "solid" | undefined>
+            frame?: 'dashed' | 'none' | 'solid' | undefined | SignalLike<'dashed' | 'none' | 'solid' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#framespacing */
             framespacing?: string | undefined | SignalLike<string | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowalign */
             rowalign?:
-            | "axis"
-            | "baseline"
-            | "bottom"
-            | "center"
-            | "top"
-            | undefined
-            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+                | 'axis'
+                | 'baseline'
+                | 'bottom'
+                | 'center'
+                | 'top'
+                | undefined
+                | SignalLike<'axis' | 'baseline' | 'bottom' | 'center' | 'top' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowlines */
-            rowlines?: "dashed" | "none" | "solid" | undefined | SignalLike<"dashed" | "none" | "solid" | undefined>
+            rowlines?: 'dashed' | 'none' | 'solid' | undefined | SignalLike<'dashed' | 'none' | 'solid' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#rowspacing */
             rowspacing?: string | undefined | SignalLike<string | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtable#width */
@@ -1664,32 +1664,32 @@ declare global {
             columnspan?: number | undefined | SignalLike<number | undefined>
             rowspan?: number | undefined | SignalLike<number | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtd#columnalign */
-            columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
+            columnalign?: 'center' | 'left' | 'right' | undefined | SignalLike<'center' | 'left' | 'right' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtd#rowalign */
             rowalign?:
-            | "axis"
-            | "baseline"
-            | "bottom"
-            | "center"
-            | "top"
-            | undefined
-            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+                | 'axis'
+                | 'baseline'
+                | 'bottom'
+                | 'center'
+                | 'top'
+                | undefined
+                | SignalLike<'axis' | 'baseline' | 'bottom' | 'center' | 'top' | undefined>
         }
 
-        export interface HTMLMTextElement extends MathMLElement { }
+        export interface HTMLMTextElement extends MathMLElement {}
 
         export interface HTMLMTrElement extends MathMLElement {
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtr#columnalign */
-            columnalign?: "center" | "left" | "right" | undefined | SignalLike<"center" | "left" | "right" | undefined>
+            columnalign?: 'center' | 'left' | 'right' | undefined | SignalLike<'center' | 'left' | 'right' | undefined>
             /** Non-standard attribute See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mtr#rowalign */
             rowalign?:
-            | "axis"
-            | "baseline"
-            | "bottom"
-            | "center"
-            | "top"
-            | undefined
-            | SignalLike<"axis" | "baseline" | "bottom" | "center" | "top" | undefined>
+                | 'axis'
+                | 'baseline'
+                | 'bottom'
+                | 'center'
+                | 'top'
+                | undefined
+                | SignalLike<'axis' | 'baseline' | 'bottom' | 'center' | 'top' | undefined>
         }
 
         export interface HTMLMUnderElement extends MathMLElement {
@@ -1701,7 +1701,7 @@ declare global {
             accentunder?: boolean | undefined | SignalLike<boolean | undefined>
         }
 
-        export interface HTMLSemanticsElement extends MathMLElement { }
+        export interface HTMLSemanticsElement extends MathMLElement {}
 
         export interface IntrinsicElements {
             // HTML
@@ -1884,7 +1884,7 @@ declare global {
             view: SVGAttributes<SVGViewElement>
 
             // MathML See https://developer.mozilla.org/en-US/docs/Web/MathML
-            "annotation-xml": MathMLAttributes<HTMLAnnotationXmlElement>
+            'annotation-xml': MathMLAttributes<HTMLAnnotationXmlElement>
             annotation: MathMLAttributes<HTMLAnnotationElement>
             /** @deprecated See https://developer.mozilla.org/en-US/docs/Web/MathML/Element/maction */
             maction: MathMLAttributes<HTMLMActionElement>

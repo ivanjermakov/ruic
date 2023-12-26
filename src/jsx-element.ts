@@ -6,7 +6,6 @@ export type JsxComponentType<P> = new (props: P) => Component<P>
 export type JsxElementType<P> = string | JsxComponentType<P>
 
 export class JsxElement<P> {
-
     root?: HTMLElement
     element?: HTMLElement
     component?: Component<P>
@@ -26,9 +25,7 @@ export class JsxElement<P> {
 
     children(): JSX.Element[] {
         const ps = <any>this.props
-        return 'children' in ps
-            ? <JsxElement<any>[]>ps.children
-            : []
+        return 'children' in ps ? <JsxElement<any>[]>ps.children : []
     }
 
     render(root: HTMLElement): void {
@@ -53,10 +50,9 @@ export class JsxElement<P> {
 
         Object.entries(<any>this.props)
             .filter(([k]) => k.startsWith('on'))
-            .forEach(([prop, value]) => el.addEventListener(
-                prop.slice(2).toLowerCase(),
-                <EventListenerOrEventListenerObject>value
-            ))
+            .forEach(([prop, value]) =>
+                el.addEventListener(prop.slice(2).toLowerCase(), <EventListenerOrEventListenerObject>value)
+            )
 
         Object.entries(<any>this.props)
             .filter(([k]) => k !== 'children')
@@ -122,11 +118,9 @@ export class JsxElement<P> {
             value.subscribe(v => this.setAttribute(prop, v, el))
         }
         if (prop === 'class') {
-            (<any>el).className = v
+            ;(<any>el).className = v
         } else {
-            ((<any>el)[prop] = v)
+            ;(<any>el)[prop] = v
         }
     }
-
 }
-

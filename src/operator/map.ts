@@ -1,4 +1,4 @@
-import { OperatorFunction, Signal } from "../signal";
+import { OperatorFunction, Signal } from '../signal'
 
 export function map<T, U>(fn: (value: T) => U): OperatorFunction<T, U> {
     return s => {

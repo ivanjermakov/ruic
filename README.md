@@ -7,4 +7,3 @@
 </h1>
 
 <h4 align="center">Reactive UI Components library</h4>
-

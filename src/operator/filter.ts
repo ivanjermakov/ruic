@@ -1,4 +1,4 @@
-import { OperatorFunction, Signal } from "../signal";
+import { OperatorFunction, Signal } from '../signal'
 
 export function filter<T>(fn: (value: T) => boolean): OperatorFunction<T, T> {
     return s => {

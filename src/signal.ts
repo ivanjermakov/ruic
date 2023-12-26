@@ -1,12 +1,11 @@
 export interface UnaryFunction<T, R> {
-    (source: T): R;
+    (source: T): R
 }
 
-export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> { }
+export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> {}
 
 export class Signal<T> implements JSX.SignalLike<T> {
-
-    private value: T;
+    private value: T
     comparator: (a: T, b: T) => boolean
     observers: Map<number, Subscription<T>>
     id: number = 0
@@ -23,8 +22,8 @@ export class Signal<T> implements JSX.SignalLike<T> {
 
     set(value: T): void {
         if (this.comparator(this.value, value)) return
-        this.value = value;
-        [...this.observers.values()].forEach(o => o.fn(value, o))
+        this.value = value
+        ;[...this.observers.values()].forEach(o => o.fn(value, o))
     }
 
     update(fn: (value: T) => T): void {
@@ -33,7 +32,7 @@ export class Signal<T> implements JSX.SignalLike<T> {
     }
 
     subscribe(fn: (value: T, subscription: Subscription<T>) => void): Subscription<T> {
-        const id = ++this.id;
+        const id = ++this.id
         const sub = new Subscription<T>(id, fn, this.observers)
         this.observers.set(id, sub)
         return sub
@@ -46,16 +45,16 @@ export class Signal<T> implements JSX.SignalLike<T> {
         })
     }
 
-    pipe<A>(op1: OperatorFunction<T, A>): Signal<A>;
-    pipe<A, B>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>): Signal<B>;
-    pipe<A, B, C>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>): Signal<C>;
+    pipe<A>(op1: OperatorFunction<T, A>): Signal<A>
+    pipe<A, B>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>): Signal<B>
+    pipe<A, B, C>(op1: OperatorFunction<T, A>, op2: OperatorFunction<A, B>, op3: OperatorFunction<B, C>): Signal<C>
     pipe<A, B, C, D>(
         op1: OperatorFunction<T, A>,
         op2: OperatorFunction<A, B>,
         op3: OperatorFunction<B, C>,
         op4: OperatorFunction<C, D>,
         ...operations: OperatorFunction<any, any>[]
-    ): Signal<unknown>;
+    ): Signal<unknown>
     pipe(...operations: OperatorFunction<any, any>[]): Signal<unknown> {
         return operations.reduce((s, op) => op(s), <Signal<any>>this)
     }
@@ -69,7 +68,6 @@ export class Signal<T> implements JSX.SignalLike<T> {
         }
         return value
     }
-
 }
 
 export class Subscription<T> {
@@ -77,7 +75,7 @@ export class Subscription<T> {
         public id: number,
         public fn: (value: T, subscription: Subscription<T>) => void,
         private observers: Map<number, Subscription<T>>
-    ) { }
+    ) {}
 
     cancel(): boolean {
         const deleted = this.observers.delete(this.id)
