@@ -93,7 +93,8 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
             this.renderChild(cv, el, rerender)
             c.once(() => this.render(this.root!))
         } else if (typeof c === 'string' || typeof c === 'number') {
-            el.innerHTML += c
+            const t = document.createTextNode(c.toString())
+            el.appendChild(t)
         } else if (c instanceof JsxElement) {
             const keyedEl = rerender && c.key !== undefined ? this.childMap.get(c.key) : undefined
             if (keyedEl) {
