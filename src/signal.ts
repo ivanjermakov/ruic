@@ -60,6 +60,16 @@ export class Signal<T> implements JSX.SignalLike<T> {
         return operations.reduce((s, op) => op(s), <Signal<any>>this)
     }
 
+    /**
+     * Recursively extract signal's value
+     */
+    static unwrap(value: any): any {
+        if (value instanceof Signal) {
+            return Signal.unwrap(value.get())
+        }
+        return value
+    }
+
 }
 
 export class Subscription<T> {

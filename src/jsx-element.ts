@@ -1,11 +1,11 @@
 import { Component } from './component'
 import { Signal } from './signal'
 
-export type JsxComponentType<P extends JSX.HTMLAttributes> = new (props: P) => Component<P>
+export type JsxComponentType<P> = new (props: P) => Component<P>
 
-export type JsxElementType<P extends JSX.HTMLAttributes> = string | JsxComponentType<P>
+export type JsxElementType<P> = string | JsxComponentType<P>
 
-export class JsxElement<P extends JSX.HTMLAttributes> {
+export class JsxElement<P> {
 
     root?: HTMLElement
     element?: HTMLElement
@@ -61,11 +61,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         Object.entries(<any>this.props)
             .filter(([k]) => k !== 'children')
             .forEach(([prop, value]) => {
-                if (prop === 'class') {
-                    ((<any>el).className = value)
-                } else {
-                    ((<any>el)[prop] = value)
-                }
+                this.setAttribute(prop, value, el)
             })
 
         if (rerender) {
@@ -116,6 +112,19 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
             }
         } else {
             console.warn('unexpected child', c)
+        }
+    }
+
+    private setAttribute(prop: string, value: any, el: HTMLElement): void {
+        let v = value
+        if (value instanceof Signal) {
+            v = Signal.unwrap(value)
+            value.subscribe(v => this.setAttribute(prop, v, el))
+        }
+        if (prop === 'class') {
+            (<any>el).className = v
+        } else {
+            ((<any>el)[prop] = v)
         }
     }
 
