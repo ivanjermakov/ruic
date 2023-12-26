@@ -27,7 +27,7 @@
 
 export { }
 
-import { JsxComponentType, JsxElement } from "./jsx-element"
+import { JsxElement } from "./jsx-element"
 import { Subscription } from "./signal"
 
 declare global {
@@ -38,11 +38,6 @@ declare global {
             key?: any
         }
 
-        export type ElementType<P extends HTMLAttributes = {}> =
-            | {
-                [K in keyof IntrinsicElements]: P extends IntrinsicElements[K] ? K : never
-            }[keyof IntrinsicElements]
-            | JsxComponentType<P>
         export interface Element extends JsxElement<any> { }
 
         export interface ElementAttributesProperty {
