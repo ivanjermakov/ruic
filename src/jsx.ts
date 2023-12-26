@@ -1131,7 +1131,8 @@ declare global {
         export interface HTMLAttributes<RefType extends EventTarget = EventTarget>
             extends DOMAttributes<RefType>,
             AriaAttributes,
-            ElementChildrenAttribute {
+            ElementChildrenAttribute,
+            IntrinsicAttributes {
             // Standard HTML Attributes
             accept?: string | undefined | SignalLike<string | undefined>
             acceptCharset?: string | undefined | SignalLike<string | undefined>

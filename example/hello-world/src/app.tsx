@@ -22,7 +22,7 @@ export class App extends Component {
                 Click me! Clicks: {this.count.pipe(map(c => c.toString() + ' time' + (c === 1 ? '' : 's')))}
             </Button>
             <div class="timestamps">
-                {this.timestamps.pipe(map(ts => ts.map((t, i) => <p>{i + 1}: {t}</p>)))}
+                {this.timestamps.pipe(map(ts => ts.map(t => <p key={t}>{new Date(t).toLocaleTimeString()}</p>)))}
             </div>
         </div>
     }

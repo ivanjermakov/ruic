@@ -11,6 +11,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
     element?: HTMLElement
     component?: Component<P>
     componentElement?: JSX.Element
+    childMap: Map<any, HTMLElement> = new Map()
 
     constructor(
         public type: JsxElementType<P>,
@@ -32,9 +33,6 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
 
     render(root: HTMLElement): void {
         const rerender = this.element !== undefined
-        if (rerender) {
-            console.debug('rerender', this.element)
-        }
         this.root = root
         if (typeof this.type === 'string') {
             this.renderIntrinsic(rerender)
@@ -49,7 +47,7 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         const children = this.children()
         if (children) {
             for (const c of children) {
-                this.renderChild(c, el)
+                this.renderChild(c, el, rerender)
             }
         }
 
@@ -87,17 +85,29 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
         this.componentElement.render(this.root!)
     }
 
-    private renderChild(c: any, el: HTMLElement): void {
+    private renderChild(c: any, el: HTMLElement, rerender: boolean): void {
         if (Array.isArray(c)) {
-            c.forEach(sc => this.renderChild(sc, el))
+            c.forEach(sc => this.renderChild(sc, el, rerender))
         } else if (c instanceof Signal) {
             const cv = c.get()
-            this.renderChild(cv, el)
+            this.renderChild(cv, el, rerender)
             c.once(() => this.render(this.root!))
         } else if (typeof c === 'string' || typeof c === 'number') {
             el.innerHTML += c
         } else if (c instanceof JsxElement) {
-            c.render(el)
+            const keyedEl = rerender && c.key !== undefined ? this.childMap.get(c.key) : undefined
+            if (keyedEl) {
+                // take from cache without rerender
+                // TODO: this is wrong, need to confirm underlying data was not changed
+                // (cache the whole JsxElement and diff)
+                el.appendChild(keyedEl)
+            } else {
+                c.render(el)
+                // update keyed element
+                if (c.key !== undefined && c.element) {
+                    this.childMap.set(c.key, c.element)
+                }
+            }
         } else {
             console.warn('unexpected child', c)
         }
