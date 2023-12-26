@@ -79,9 +79,14 @@ export class JsxElement<P extends JSX.HTMLAttributes> {
     }
 
     private renderComponent(): void {
-        if (typeof this.type === 'string') return
-        this.component = new this.type(this.props)
-        this.componentElement = this.component.render()
+        if (typeof this.type === 'string') {
+            console.warn('not a component', this)
+            return
+        }
+        if (!this.component || !this.componentElement) {
+            this.component = new this.type(this.props)
+            this.componentElement = this.component.render()
+        }
         this.componentElement.render(this.root!)
     }
 
