@@ -11,6 +11,7 @@ export class JsxElement<P> {
     element?: HTMLElement
     component?: Component<P>
     componentElement?: JSX.Element
+    childMap?: Map<any, HTMLElement>
 
     constructor(
         public type: JsxElementType<P>,
@@ -32,19 +33,19 @@ export class JsxElement<P> {
         const rerender = this.element !== undefined
         this.root = root
         if (typeof this.type === 'string') {
-            this.renderIntrinsic(rerender)
+            this.renderIntrinsic()
         } else {
             this.renderComponent()
         }
     }
 
-    private renderIntrinsic(rerender: boolean): void {
+    private renderIntrinsic(): void {
         const el = document.createElement(<string>this.type)
 
         const children = this.children()
         if (children) {
             for (const c of children) {
-                this.renderChild(c, el, rerender)
+                this.renderChild(c, el)
             }
         }
 
@@ -58,13 +59,12 @@ export class JsxElement<P> {
             }
         }
 
-        if (rerender) {
-            this.root!.replaceChild(el, this.element!)
-            this.element = el
+        if (this.element !== undefined) {
+            this.element.replaceWith(el)
         } else {
-            this.element = el
-            this.root!.appendChild(this.element)
+            this.root!.appendChild(el)
         }
+        this.element = el
     }
 
     private renderComponent(): void {
@@ -79,12 +79,12 @@ export class JsxElement<P> {
         this.componentElement.render(this.root!)
     }
 
-    private renderChild(c: any, el: HTMLElement, rerender: boolean): void {
+    private renderChild(c: any, el: HTMLElement): void {
         if (Array.isArray(c)) {
-            c.forEach(sc => this.renderChild(sc, el, rerender))
+            c.forEach(sc => this.renderChild(sc, el))
         } else if (c instanceof Signal) {
             const cv = c.get()
-            this.renderChild(cv, el, rerender)
+            this.renderChild(cv, el)
             c.pipe(first()).subscribe(() => this.render(this.root!))
         } else if (typeof c === 'string' || typeof c === 'number') {
             const t = document.createTextNode(c.toString())
@@ -103,7 +103,7 @@ export class JsxElement<P> {
             value.subscribe(v => this.setAttribute(prop, v, el))
         }
         if (prop === 'class') {
-            ; (<any>el).className = v
+            el.className = v
         } else {
             ; (<any>el)[prop] = v
         }
