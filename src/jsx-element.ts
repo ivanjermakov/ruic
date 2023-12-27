@@ -10,7 +10,6 @@ export class JsxElement<P> {
     element?: HTMLElement
     component?: Component<P>
     componentElement?: JSX.Element
-    childMap: Map<any, HTMLElement> = new Map()
 
     constructor(
         public type: JsxElementType<P>,
@@ -93,19 +92,7 @@ export class JsxElement<P> {
             const t = document.createTextNode(c.toString())
             el.appendChild(t)
         } else if (c instanceof JsxElement) {
-            const keyedEl = rerender && c.key !== undefined ? this.childMap.get(c.key) : undefined
-            if (keyedEl) {
-                // take from cache without rerender
-                // TODO: this is wrong, need to confirm underlying data was not changed
-                // (cache the whole JsxElement and diff)
-                el.appendChild(keyedEl)
-            } else {
-                c.render(el)
-                // update keyed element
-                if (c.key !== undefined && c.element) {
-                    this.childMap.set(c.key, c.element)
-                }
-            }
+            c.render(el)
         } else {
             console.warn('unexpected child', c)
         }
