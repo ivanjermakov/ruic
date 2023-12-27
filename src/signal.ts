@@ -2,7 +2,7 @@ export interface UnaryFunction<T, R> {
     (source: T): R
 }
 
-export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> { }
+export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> {}
 
 export type Subscription<T> = (value: T) => void
 
@@ -27,7 +27,7 @@ export class Signal<T> implements JSX.SignalLike<T> {
     set(value: T): void {
         if (this.comparator(this.value, value)) return
         this.value = value
-            ;[...this.observers.values()].forEach(o => o(value))
+        ;[...this.observers.values()].forEach(o => o(value))
     }
 
     update(fn: (value: T) => T): void {
@@ -69,4 +69,3 @@ export class Signal<T> implements JSX.SignalLike<T> {
         return value
     }
 }
-
