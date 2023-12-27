@@ -48,17 +48,15 @@ export class JsxElement<P> {
             }
         }
 
-        Object.entries(<any>this.props)
-            .filter(([k]) => k.startsWith('on'))
-            .forEach(([prop, value]) =>
+        for (const prop of Object.keys(<any>this.props)) {
+            if (prop === 'children') continue
+            const value = (<any>this.props)[prop]
+            if (prop.startsWith('on')) {
                 el.addEventListener(prop.slice(2).toLowerCase(), <EventListenerOrEventListenerObject>value)
-            )
-
-        Object.entries(<any>this.props)
-            .filter(([k]) => k !== 'children')
-            .forEach(([prop, value]) => {
+            } else {
                 this.setAttribute(prop, value, el)
-            })
+            }
+        }
 
         if (rerender) {
             this.root!.replaceChild(el, this.element!)
