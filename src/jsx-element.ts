@@ -61,8 +61,7 @@ export class JsxElement<P> {
             })
 
         if (rerender) {
-            this.root!.insertBefore(el, this.element!)
-            this.element!.remove()
+            this.root!.replaceChild(el, this.element!)
             this.element = el
         } else {
             this.element = el
