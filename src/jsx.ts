@@ -28,7 +28,7 @@
 export {}
 
 import { JsxElement } from './jsx-element'
-import { Subscription } from './signal'
+import { CancelSubscription } from './signal'
 
 declare global {
     export namespace JSX {
@@ -63,7 +63,7 @@ declare global {
 
         export interface SignalLike<T> {
             set(value: T): void
-            subscribe(fn: (value: T, subscription?: Subscription<T>) => void): Subscription<T>
+            subscribe(fn: (value: T) => void): CancelSubscription
         }
 
         export type Signalish<T> = T | SignalLike<T>

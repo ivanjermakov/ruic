@@ -1,4 +1,5 @@
 import { Component } from './component'
+import { first } from './operator/first'
 import { Signal } from './signal'
 
 export type JsxComponentType<P> = new (props: P) => Component<P>
@@ -87,7 +88,7 @@ export class JsxElement<P> {
         } else if (c instanceof Signal) {
             const cv = c.get()
             this.renderChild(cv, el, rerender)
-            c.once(() => this.render(this.root!))
+            c.pipe(first()).subscribe(() => this.render(this.root!))
         } else if (typeof c === 'string' || typeof c === 'number') {
             const t = document.createTextNode(c.toString())
             el.appendChild(t)
@@ -105,9 +106,9 @@ export class JsxElement<P> {
             value.subscribe(v => this.setAttribute(prop, v, el))
         }
         if (prop === 'class') {
-            ;(<any>el).className = v
+            ; (<any>el).className = v
         } else {
-            ;(<any>el)[prop] = v
+            ; (<any>el)[prop] = v
         }
     }
 }

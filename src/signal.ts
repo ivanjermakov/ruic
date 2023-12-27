@@ -2,7 +2,11 @@ export interface UnaryFunction<T, R> {
     (source: T): R
 }
 
-export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> {}
+export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> { }
+
+export type Subscription<T> = (value: T) => void
+
+export type CancelSubscription = () => void
 
 export class Signal<T> implements JSX.SignalLike<T> {
     private value: T
@@ -23,7 +27,7 @@ export class Signal<T> implements JSX.SignalLike<T> {
     set(value: T): void {
         if (this.comparator(this.value, value)) return
         this.value = value
-        ;[...this.observers.values()].forEach(o => o.fn(value, o))
+            ;[...this.observers.values()].forEach(o => o(value))
     }
 
     update(fn: (value: T) => T): void {
@@ -31,18 +35,14 @@ export class Signal<T> implements JSX.SignalLike<T> {
         this.set(v)
     }
 
-    subscribe(fn: (value: T, subscription: Subscription<T>) => void): Subscription<T> {
-        const id = ++this.id
-        const sub = new Subscription<T>(id, fn, this.observers)
-        this.observers.set(id, sub)
-        return sub
+    complete(): void {
+        this.observers.clear()
     }
 
-    once(fn: (value: T) => void): void {
-        this.subscribe((v, sub) => {
-            sub.cancel()
-            fn(v)
-        })
+    subscribe(fn: (value: T) => void): () => void {
+        const id = ++this.id
+        this.observers.set(id, fn)
+        return () => this.observers.delete(id)
     }
 
     pipe<A>(op1: OperatorFunction<T, A>): Signal<A>
@@ -70,18 +70,3 @@ export class Signal<T> implements JSX.SignalLike<T> {
     }
 }
 
-export class Subscription<T> {
-    constructor(
-        public id: number,
-        public fn: (value: T, subscription: Subscription<T>) => void,
-        private observers: Map<number, Subscription<T>>
-    ) {}
-
-    cancel(): boolean {
-        const deleted = this.observers.delete(this.id)
-        if (!deleted) {
-            console.debug(`subscription @${this.id} does not exist`)
-        }
-        return deleted
-    }
-}
