@@ -6,17 +6,17 @@ export type JsxComponentType<P> = new (props: P) => Component<P>
 export type JsxElementType<P> = string | JsxComponentType<P>
 
 export class JsxElement<P> {
-    root?: Element
-    element?: Element
-    component?: Component<P>
-    componentElement?: JsxElement<any>
-    keyMap: Map<any, JsxElement<any>> = new Map()
-    subs: CancelSubscription[] = []
+    private root?: Element
+    private element?: Element
+    private component?: Component<P>
+    private componentElement?: JsxElement<any>
+    private keyMap: Map<any, JsxElement<any>> = new Map()
+    private subs: CancelSubscription[] = []
 
     constructor(
-        public type: JsxElementType<P>,
-        public props: P,
-        public key?: any
+        private type: JsxElementType<P>,
+        private props: P,
+        private key?: any
     ) {
         const ps = <any>props
         if ('children' in ps && !Array.isArray(ps.children)) {
@@ -107,7 +107,14 @@ export class JsxElement<P> {
                     .map(e => <const>[e.key, e])
             )
             if (this.keyMap.size === this.element!.children.length) {
-                this.renderKeyed(keyMap)
+                // fast path: delete all children
+                if (keyMap.size === 0) {
+                    this.keyMap.forEach(v => v.drop())
+                    this.keyMap.clear()
+                    this.element!.replaceChildren()
+                } else {
+                    this.renderKeyed(keyMap)
+                }
             } else {
                 this.renderNonKeyed(c, keyMap)
             }

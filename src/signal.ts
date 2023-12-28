@@ -1,8 +1,12 @@
+import { id } from './operator/id'
+
 export interface UnaryFunction<T, R> {
     (source: T): R
 }
 
-export interface OperatorFunction<T, R> extends UnaryFunction<Signal<T>, Signal<R>> {}
+export type OperatorResult<T> = { type: 'value'; value: T } | { type: 'completed' | 'consumed' }
+
+export interface OperatorFunction<T, R> extends UnaryFunction<T, OperatorResult<R>> {}
 
 export type Subscription<T> = (value: T) => void
 
@@ -10,9 +14,9 @@ export type CancelSubscription = () => void
 
 export class Signal<T> implements JSX.SignalLike<T> {
     private value: T
-    comparator: (a: T, b: T) => boolean
-    observers: Map<number, Subscription<T>>
-    id: number = 0
+    private comparator: (a: T, b: T) => boolean
+    private observers: Map<number, Subscription<T>>
+    private id: number = 0
 
     constructor(initial: T, comparator: (a: T, b: T) => boolean = (a, b) => a === b) {
         this.value = initial
@@ -53,10 +57,34 @@ export class Signal<T> implements JSX.SignalLike<T> {
         op2: OperatorFunction<A, B>,
         op3: OperatorFunction<B, C>,
         op4: OperatorFunction<C, D>,
-        ...operations: OperatorFunction<any, any>[]
+        ...operators: OperatorFunction<any, any>[]
     ): Signal<unknown>
-    pipe(...operations: OperatorFunction<any, any>[]): Signal<unknown> {
-        return operations.reduce((s, op) => op(s), <Signal<any>>this)
+    pipe<R>(...operators: OperatorFunction<any, any>[]): Signal<R> {
+        const pipeFactory =
+            () =>
+            <T>(v: T): OperatorResult<R> => {
+                let res = id()(v)
+                for (const op of operators) {
+                    if (res.type === 'value') {
+                        res = op(res.value)
+                    } else {
+                        return res
+                    }
+                }
+                return <OperatorResult<R>>res
+            }
+        const initial = pipeFactory()(this.get())
+        const s = new Signal<R>(initial.type === 'value' ? initial.value : <any>undefined)
+        const pipe = pipeFactory()
+        this.subscribe(v => {
+            const r = pipe(v)
+            if (r.type === 'value') {
+                s.set(<R>r.value)
+            } else if (r.type === 'completed') {
+                s.complete()
+            }
+        })
+        return s
     }
 
     /**

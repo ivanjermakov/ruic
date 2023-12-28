@@ -12,7 +12,8 @@
         "sourceMap": true,
         "outDir": "./dist",
         "lib": ["dom", "es5", "scripthost", "es2015.symbol.wellknown", "es2015.collection"],
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "useDefineForClassFields": false
     },
     "include": ["src/**/*"]
 }
