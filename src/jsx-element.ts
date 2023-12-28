@@ -1,5 +1,5 @@
 import { Component } from './component'
-import { Signal } from './signal'
+import { CancelSubscription, Signal } from './signal'
 
 export type JsxComponentType<P> = new (props: P) => Component<P>
 
@@ -11,6 +11,7 @@ export class JsxElement<P> {
     component?: Component<P>
     componentElement?: JsxElement<any>
     keyMap: Map<any, JsxElement<any>> = new Map()
+    subs: CancelSubscription[] = []
 
     constructor(
         public type: JsxElementType<P>,
@@ -26,9 +27,9 @@ export class JsxElement<P> {
         }
     }
 
-    children(): JSX.Element[] {
+    children(): any[] {
         const ps = <any>this.props
-        return 'children' in ps ? <JsxElement<any>[]>ps.children : []
+        return 'children' in ps ? ps.children : []
     }
 
     render(root: Element): void {
@@ -38,6 +39,21 @@ export class JsxElement<P> {
         } else {
             this.renderComponent()
         }
+    }
+
+    /**
+    * Remove element references and cancel subscriptions 
+    */
+    drop(): void {
+        this.children().forEach(c => {
+            if (c instanceof JsxElement) {
+                c.drop()
+            }
+        })
+        this.subs.forEach(fn => fn())
+        this.element = undefined
+        this.componentElement = undefined
+        this.keyMap.clear()
     }
 
     private renderIntrinsic(): void {
@@ -97,10 +113,16 @@ export class JsxElement<P> {
             }
         } else if (c instanceof Signal) {
             this.renderChild(c.get())
-            c.subscribe(c_ => this.renderChild(c_))
+            this.subs.push(c.subscribe(c_ => this.renderChild(c_)))
         } else if (typeof c === 'string' || typeof c === 'number') {
-            const t = document.createTextNode(c.toString())
-            this.element!.appendChild(t)
+            // TODO: will break with a list of primitives, not sure how to update them
+            const tn = this.element!.firstChild
+            if (tn && tn instanceof Text) {
+                tn.nodeValue = c.toString()
+            } else {
+                const t = document.createTextNode(c.toString())
+                this.element!.appendChild(t)
+            }
         } else if (c instanceof JsxElement) {
             c.render(this.element!)
         } else {
@@ -112,6 +134,7 @@ export class JsxElement<P> {
         this.keyMap.forEach((v, k) => {
             if (!keyMap.has(k)) {
                 v.element?.remove()
+                v.drop()
                 this.keyMap.delete(k)
             }
         })
@@ -145,6 +168,7 @@ export class JsxElement<P> {
             const e = this.element!.children[i]
             const k = e.getAttribute('key')
             if (!k || !newKeysStr.has(k)) {
+                // TODO drop JsxElement holding this node
                 e.remove()
             } else {
                 i++
@@ -171,8 +195,9 @@ export class JsxElement<P> {
         let v = value
         if (value instanceof Signal) {
             v = Signal.unwrap(value)
-            value.subscribe(v => this.setAttribute(prop, v))
+            this.subs.push(value.subscribe(v => this.setAttribute(prop, v)))
         }
         this.element!.setAttribute(prop, v)
     }
+
 }
