@@ -15,13 +15,12 @@ export type CancelSubscription = () => void
 export class Signal<T> implements JSX.SignalLike<T> {
     private value: T
     private comparator: (a: T, b: T) => boolean
-    private observers: Map<number, Subscription<T>>
-    private id: number = 0
+    private observers: Set<Subscription<T>>
 
     constructor(initial: T, comparator: (a: T, b: T) => boolean = (a, b) => a === b) {
         this.value = initial
         this.comparator = comparator
-        this.observers = new Map()
+        this.observers = new Set()
     }
 
     get(): T {
@@ -44,9 +43,8 @@ export class Signal<T> implements JSX.SignalLike<T> {
     }
 
     subscribe(fn: (value: T) => void): () => void {
-        const id = ++this.id
-        this.observers.set(id, fn)
-        return () => this.observers.delete(id)
+        this.observers.add(fn)
+        return () => this.observers.delete(fn)
     }
 
     pipe<A>(op1: OperatorFunction<T, A>): Signal<A>
