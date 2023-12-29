@@ -5,7 +5,7 @@ export function take<T>(n: number): OperatorFunction<T, T> {
     return v => {
         i++
         if (i >= n) {
-            return { type: 'completed' }
+            return { type: 'completed', value: v }
         }
         return { type: 'value', value: v }
     }
