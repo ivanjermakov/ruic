@@ -12,6 +12,7 @@ export class JsxElement<P> {
     private componentElement?: JsxElement<any>
     private keyMap: Map<any, JsxElement<any>> = new Map()
     private subs: CancelSubscription[] = []
+    private unmounts: (() => void)[] = []
 
     constructor(
         private type: JsxElementType<P>,
@@ -40,8 +41,10 @@ export class JsxElement<P> {
      * Remove element references and cancel subscriptions
      */
     drop(): void {
+        this.unmounts.forEach(f => f())
         const ps = <JSX.HTMLAttributes>this.props
         ps.onUnmount?.()
+
         this.children().forEach(c => {
             this.dropChild(c)
         })
@@ -50,6 +53,7 @@ export class JsxElement<P> {
             const value = (<any>this.props)[prop]
             this.dropChild(value)
         }
+
         this.element = undefined
         this.componentElement = undefined
         this.keyMap.clear()
@@ -113,6 +117,9 @@ export class JsxElement<P> {
     }
 
     private renderChild(c: any, i?: number): void {
+        if (typeof c === 'object' && c.hasOwnProperty('onUnmount')) {
+            this.unmounts.push(c.onUnmount)
+        }
         if (Array.isArray(c)) {
             const keyMap = new Map(
                 c
