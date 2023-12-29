@@ -263,6 +263,7 @@ export class JsxElement<P> {
      * Move required data so that this element is replacing other element and other element is dropped
      */
     private merge(other: JsxElement<any>): void {
+        if (this === other) return
         other.drop()
     }
 }
