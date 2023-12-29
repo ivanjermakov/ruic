@@ -1,12 +1,28 @@
+:root {
+    --fg: black;
+    --bg: white;
+    --border: silver;
+}
+
+* {
+    font-family: monospace;
+}
+
+html {
+    font-size: 14px;
+}
+
 html,
 body {
     height: 100%;
+    color: var(--fg);
 }
 
 body {
     margin: 0;
     display: flex;
     justify-content: center;
+    background-color: var(--bg);
 }
 
 p,
@@ -20,7 +36,7 @@ h1 {
     gap: 1rem;
     margin-top: 2rem;
     padding: 1rem;
-    border: 2px solid black;
+    border: 2px solid var(--border);
 }
 
 .timestamps {

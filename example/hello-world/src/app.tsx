@@ -14,16 +14,22 @@ export class App extends Component {
     }
 
     override render() {
+        const timestamps = this.timestamps.pipe(
+            map(ts => ts.map(t => <p key={t}>{new Date(t).toLocaleTimeString()}</p>))
+        )
         return (
             <div class="app">
+                {/*
                 <h1 id="hello">Welcome to Ruic!</h1>
+                <img src="/logo.svg" />
+                */}
                 <p>Big count: {this.bigCount}</p>
                 <Button onClick={() => this.handleClick()}>
                     Click me! Clicks: {this.count.pipe(map(c => c.toString() + ' time' + (c === 1 ? '' : 's')))}
                 </Button>
-                <div class="timestamps">
-                    {this.timestamps.pipe(map(ts => ts.map(t => <p key={t}>{new Date(t).toLocaleTimeString()}</p>)))}
-                </div>
+                {/*
+                <div class="timestamps"> {timestamps} </div>
+                */}
             </div>
         )
     }
