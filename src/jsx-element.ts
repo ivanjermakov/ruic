@@ -8,11 +8,10 @@ export type JsxElementType<P> = string | JsxComponentType<P>
 export class JsxElement<P> {
     private root?: Element
     private element?: Element
-    private component?: Component<P>
     private componentElement?: JsxElement<any>
-    private keyMap: Map<any, JsxElement<any>> = new Map()
-    private subs: CancelSubscription[] = []
-    private unmounts: (() => void)[] = []
+    private keyMap?: Map<any, JsxElement<any>>
+    private subs?: CancelSubscription[]
+    private unmounts?: (() => void)[]
 
     constructor(
         private type: JsxElementType<P>,
@@ -41,7 +40,7 @@ export class JsxElement<P> {
      * Remove element references and cancel subscriptions
      */
     drop(): void {
-        this.unmounts.forEach(f => f())
+        this.unmounts?.forEach(f => f())
         const ps = <JSX.HTMLAttributes>this.props
         ps.onUnmount?.()
 
@@ -56,8 +55,8 @@ export class JsxElement<P> {
 
         this.element = undefined
         this.componentElement = undefined
-        this.keyMap.clear()
-        this.subs.forEach(s => s())
+        this.keyMap?.clear()
+        this.subs?.forEach(s => s())
     }
 
     render(root: Element): void {
@@ -104,20 +103,21 @@ export class JsxElement<P> {
             console.warn('not a component', this)
             return
         }
-        if (!this.component || !this.componentElement) {
-            this.component = new this.type(this.props)
-            if (this.component instanceof Component) {
-                this.componentElement = this.component.render()
+        if (!this.componentElement) {
+            const component = new this.type(this.props)
+            if (component instanceof Component) {
+                this.componentElement = component.render()
                 this.componentElement.render(this.root!)
             } else {
                 this.element = this.root
-                this.renderChild(this.component)
+                this.renderChild(component)
             }
         }
     }
 
     private renderChild(c: any, i?: number): void {
         if (typeof c === 'object' && c.hasOwnProperty('onUnmount')) {
+            this.unmounts ??= []
             this.unmounts.push(c.onUnmount)
         }
         if (Array.isArray(c)) {
@@ -128,10 +128,10 @@ export class JsxElement<P> {
                     .filter(e => e.key !== undefined)
                     .map(e => <const>[e.key, e])
             )
-            if (this.keyMap.size === this.element!.children.length) {
+            if (this.keyMap && this.keyMap.size === this.element!.children.length) {
                 // fast path: delete all children
                 if (keyMap.size === 0) {
-                    queueMicrotask(() => this.keyMap.forEach(v => v.drop()))
+                    queueMicrotask(() => this.keyMap?.forEach(v => v.drop()))
                     this.keyMap.clear()
                     this.element!.replaceChildren()
                 } else {
@@ -142,6 +142,7 @@ export class JsxElement<P> {
             }
         } else if (c instanceof Signal) {
             this.renderChild(c.get(), i)
+            this.subs ??= []
             this.subs.push(c.subscribe(c_ => this.renderChild(c_, i)))
         } else if (typeof c === 'string' || typeof c === 'number') {
             // element indices stay constant since jsx does not change
@@ -164,20 +165,20 @@ export class JsxElement<P> {
     }
 
     private renderKeyed(keyMap: Map<any, JsxElement<any>>): void {
-        this.keyMap.forEach((v, k) => {
+        this.keyMap!.forEach((v, k) => {
             if (!keyMap.has(k)) {
                 v.element?.remove()
                 queueMicrotask(() => v.drop())
-                this.keyMap.delete(k)
+                this.keyMap!.delete(k)
             }
         })
-        const oldIdxMap = new Map([...this.keyMap.keys()].map((k, i) => [k, i]))
+        const oldIdxMap = new Map([...this.keyMap!.keys()].map((k, i) => [k, i]))
         const newIdxMap = new Map([...keyMap.keys()].map((k, i) => [k, i]))
         const newKeyMap = new Map()
         let lastEl: Element | null = this.element!.firstElementChild
         newIdxMap.forEach((i, k) => {
             let e = keyMap.get(k)!
-            const old = this.keyMap.get(k)
+            const old = this.keyMap!.get(k)
             const oi = oldIdxMap.get(k)
             if (old && oi !== undefined && oi === i) {
                 // existing key at correct index, merge into old
@@ -217,7 +218,7 @@ export class JsxElement<P> {
         for (let i = 0; i < c.length; i++) {
             const e = c[i]
             if (e instanceof JsxElement && e.key !== undefined) {
-                const old = this.keyMap.get(e.key)
+                const old = this.keyMap?.get(e.key)
                 if (old && old.element) {
                     old.merge(e)
                     // make child last
@@ -225,6 +226,7 @@ export class JsxElement<P> {
                 } else {
                     e.render(this.element!)
                 }
+                this.keyMap ??= new Map()
                 this.keyMap.set(e.key, e)
             } else {
                 this.renderChild(e, i)
@@ -236,6 +238,7 @@ export class JsxElement<P> {
         let v = value
         if (value instanceof Signal) {
             v = Signal.unwrap(value)
+            this.subs ??= []
             this.subs.push(value.subscribe(v => this.setAttribute(prop, v)))
         }
         this.element!.setAttribute(prop, v)
