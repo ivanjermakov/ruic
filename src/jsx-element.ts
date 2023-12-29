@@ -1,4 +1,5 @@
 import { Component } from './component'
+import { first } from './operator'
 import { CancelSubscription, Signal } from './signal'
 
 export type JsxComponentType<P> = new (props: P) => Component<P>
@@ -42,18 +43,16 @@ export class JsxElement<P> {
     }
 
     /**
-    * Remove element references and cancel subscriptions 
-    */
+     * Remove element references and cancel subscriptions
+     */
     drop(): void {
         this.children().forEach(c => {
-            if (c instanceof JsxElement) {
-                c.drop()
-            }
+            this.dropChild(c)
         })
-        this.subs.forEach(fn => fn())
         this.element = undefined
         this.componentElement = undefined
         this.keyMap.clear()
+        this.subs.forEach(fn => fn())
     }
 
     private renderIntrinsic(): void {
@@ -63,8 +62,9 @@ export class JsxElement<P> {
 
         const children = this.children()
         if (children) {
-            for (const c of children) {
-                this.renderChild(c)
+            for (let i = 0; i < children.length; i++) {
+                const c = children[i]
+                this.renderChild(c, i)
             }
         }
 
@@ -97,7 +97,7 @@ export class JsxElement<P> {
         this.componentElement.render(this.root!)
     }
 
-    private renderChild(c: any): void {
+    private renderChild(c: any, i?: number): void {
         if (Array.isArray(c)) {
             const keyMap = new Map(
                 c
@@ -119,13 +119,17 @@ export class JsxElement<P> {
                 this.renderNonKeyed(c, keyMap)
             }
         } else if (c instanceof Signal) {
-            this.renderChild(c.get())
-            this.subs.push(c.subscribe(c_ => this.renderChild(c_)))
+            this.renderChild(c.get(), i)
+            this.subs.push(c.subscribe(c_ => this.renderChild(c_, i)))
         } else if (typeof c === 'string' || typeof c === 'number') {
-            // TODO: will break with a list of primitives, not sure how to update them
-            const tn = this.element!.firstChild
-            if (tn && tn instanceof Text) {
-                tn.nodeValue = c.toString()
+            // element indices stay be constant since jsx won't change
+            const e = i !== undefined ? this.childAt(i) : undefined
+            if (e) {
+                if (e && e instanceof Text) {
+                    e.nodeValue = c.toString()
+                } else {
+                    console.warn('expected text node, got', e)
+                }
             } else {
                 const t = document.createTextNode(c.toString())
                 this.element!.appendChild(t)
@@ -149,7 +153,7 @@ export class JsxElement<P> {
         const newIdxMap = new Map([...keyMap.keys()].map((k, i) => [k, i]))
         let lastEl: Element | null = this.element!.firstElementChild
         newIdxMap.forEach((i, k) => {
-            const e = keyMap.get(k)!
+            let e = keyMap.get(k)!
             const old = this.keyMap.get(k)
             const oi = oldIdxMap.get(k)
             if (old && oi !== undefined && oi === i) {
@@ -158,7 +162,7 @@ export class JsxElement<P> {
             } else {
                 if (old && old.element) {
                     e.element = old.element
-                    this.element!.insertBefore(e.element, lastEl?.nextElementSibling ?? null)
+                    this.element!.insertBefore(e.element!, lastEl?.nextElementSibling ?? null)
                     lastEl = e.element!
                 } else {
                     e.render(this.element!)
@@ -171,7 +175,7 @@ export class JsxElement<P> {
 
     private renderNonKeyed(c: any[], keyMap: Map<any, JsxElement<any>>): void {
         const newKeysStr = new Set([...keyMap.keys()].map(k => k.toString()))
-        for (let i = 0; i < this.element!.children.length - 1;) {
+        for (let i = 0; i < this.element!.children.length - 1; ) {
             const e = this.element!.children[i]
             const k = e.getAttribute('key')
             if (!k || !newKeysStr.has(k)) {
@@ -181,7 +185,8 @@ export class JsxElement<P> {
                 i++
             }
         }
-        for (const e of c) {
+        for (let i = 0; i < c.length; i++) {
+            const e = c[i]
             if (e instanceof JsxElement && e.key !== undefined) {
                 const old = this.keyMap.get(e.key)
                 if (old && old.element) {
@@ -193,7 +198,7 @@ export class JsxElement<P> {
                 }
                 this.keyMap.set(e.key, e)
             } else {
-                this.renderChild(e)
+                this.renderChild(e, i)
             }
         }
     }
@@ -207,4 +212,23 @@ export class JsxElement<P> {
         this.element!.setAttribute(prop, v)
     }
 
+    private childAt(index: number): Node | undefined {
+        if (index >= this.element!.childNodes.length) return undefined
+        let n = this.element!.firstChild ?? undefined
+        for (let i = 0; i < index; i++) {
+            if (!n) return undefined
+            n = n.nextSibling ?? undefined
+        }
+        return n
+    }
+
+    private dropChild(c: any): void {
+        if (c instanceof JsxElement) {
+            c.drop()
+        } else if (Array.isArray(c)) {
+            c.forEach(cc => this.dropChild(cc))
+        } else if (c instanceof Signal) {
+            c.complete()
+        }
+    }
 }
