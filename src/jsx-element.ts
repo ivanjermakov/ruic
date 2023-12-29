@@ -1,4 +1,4 @@
-import { Component } from './component'
+import { Component } from './comp'
 import { CancelSubscription, Signal } from './signal'
 
 export type JsxComponentType<P> = new (props: P) => Component<P>
@@ -19,9 +19,6 @@ export class JsxElement<P> {
         private key?: any
     ) {
         const ps = <any>props
-        if ('children' in ps && !Array.isArray(ps.children)) {
-            ps.children = [ps.children]
-        }
         if ('className' in ps) {
             ps.class = ps.className
         }
@@ -29,7 +26,14 @@ export class JsxElement<P> {
 
     children(): any[] {
         const ps = <any>this.props
-        return 'children' in ps ? ps.children : []
+        if ('children' in ps) {
+            if (Array.isArray(ps.children)) {
+                return ps.children
+            } else {
+                return [ps.children]
+            }
+        }
+        return []
     }
 
     /**
@@ -98,9 +102,14 @@ export class JsxElement<P> {
         }
         if (!this.component || !this.componentElement) {
             this.component = new this.type(this.props)
-            this.componentElement = this.component.render()
+            if (this.component instanceof Component) {
+                this.componentElement = this.component.render()
+                this.componentElement.render(this.root!)
+            } else {
+                this.element = this.root
+                this.renderChild(this.component)
+            }
         }
-        this.componentElement.render(this.root!)
     }
 
     private renderChild(c: any, i?: number): void {
