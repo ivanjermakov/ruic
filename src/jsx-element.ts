@@ -131,7 +131,7 @@ export class JsxElement<P> {
             if (this.keyMap.size === this.element!.children.length) {
                 // fast path: delete all children
                 if (keyMap.size === 0) {
-                    this.keyMap.forEach(v => v.drop())
+                    queueMicrotask(() => this.keyMap.forEach(v => v.drop()))
                     this.keyMap.clear()
                     this.element!.replaceChildren()
                 } else {
@@ -167,7 +167,7 @@ export class JsxElement<P> {
         this.keyMap.forEach((v, k) => {
             if (!keyMap.has(k)) {
                 v.element?.remove()
-                v.drop()
+                queueMicrotask(() => v.drop())
                 this.keyMap.delete(k)
             }
         })
@@ -264,6 +264,6 @@ export class JsxElement<P> {
      */
     private merge(other: JsxElement<any>): void {
         if (this === other) return
-        other.drop()
+        queueMicrotask(() => other.drop())
     }
 }
