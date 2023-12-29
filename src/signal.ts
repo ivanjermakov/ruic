@@ -6,7 +6,7 @@ export interface UnaryFunction<T, R> {
 
 export type OperatorResult<T> = { type: 'value' | 'completed'; value: T } | { type: 'consumed' }
 
-export interface OperatorFunction<T, R> extends UnaryFunction<T, OperatorResult<R>> {}
+export interface OperatorFunction<T, R> extends UnaryFunction<T, OperatorResult<R>> { }
 
 export type Subscription<T> = (value: T) => void
 
@@ -41,6 +41,7 @@ export class Signal<T> implements JSX.SignalLike<T> {
     }
 
     complete(): void {
+        if (this.completed) return
         this.observers.clear()
         this.cancelFed.forEach(f => f())
         this.cancelFed.clear()
@@ -50,7 +51,7 @@ export class Signal<T> implements JSX.SignalLike<T> {
     }
 
     subscribe(fn: (value: T) => void): () => void {
-        if (this.completed) return () => {}
+        if (this.completed) return () => { }
         this.observers.add(fn)
         return () => this.observers.delete(fn)
     }

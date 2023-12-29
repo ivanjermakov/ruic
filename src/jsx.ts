@@ -48,6 +48,10 @@ declare global {
             children?: any
         }
 
+        export interface UnmountAttribute {
+            onUnmount?: () => void
+        }
+
         export type DOMCSSProperties = {
             [key in keyof Omit<
                 CSSStyleDeclaration,
@@ -1127,6 +1131,7 @@ declare global {
             extends DOMAttributes<RefType>,
                 AriaAttributes,
                 ElementChildrenAttribute,
+                UnmountAttribute,
                 IntrinsicAttributes {
             // Standard HTML Attributes
             accept?: string | undefined | SignalLike<string | undefined>

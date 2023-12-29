@@ -1,5 +1,4 @@
 import { Component } from './component'
-import { first } from './operator'
 import { CancelSubscription, Signal } from './signal'
 
 export type JsxComponentType<P> = new (props: P) => Component<P>
@@ -33,6 +32,26 @@ export class JsxElement<P> {
         return 'children' in ps ? ps.children : []
     }
 
+    /**
+     * Remove element references and cancel subscriptions
+     */
+    drop(): void {
+        const ps = <JSX.HTMLAttributes>this.props
+        ps.onUnmount?.()
+        this.children().forEach(c => {
+            this.dropChild(c)
+        })
+        for (const prop of Object.keys(ps)) {
+            if (prop === 'children') continue
+            const value = (<any>this.props)[prop]
+            this.dropChild(value)
+        }
+        this.element = undefined
+        this.componentElement = undefined
+        this.keyMap.clear()
+        this.subs.forEach(s => s())
+    }
+
     render(root: Element): void {
         this.root = root
         if (typeof this.type === 'string') {
@@ -40,19 +59,6 @@ export class JsxElement<P> {
         } else {
             this.renderComponent()
         }
-    }
-
-    /**
-     * Remove element references and cancel subscriptions
-     */
-    drop(): void {
-        this.children().forEach(c => {
-            this.dropChild(c)
-        })
-        this.element = undefined
-        this.componentElement = undefined
-        this.keyMap.clear()
-        this.subs.forEach(fn => fn())
     }
 
     private renderIntrinsic(): void {
@@ -122,7 +128,7 @@ export class JsxElement<P> {
             this.renderChild(c.get(), i)
             this.subs.push(c.subscribe(c_ => this.renderChild(c_, i)))
         } else if (typeof c === 'string' || typeof c === 'number') {
-            // element indices stay be constant since jsx won't change
+            // element indices stay constant since jsx does not change
             const e = i !== undefined ? this.childAt(i) : undefined
             if (e) {
                 if (e && e instanceof Text) {
@@ -151,35 +157,42 @@ export class JsxElement<P> {
         })
         const oldIdxMap = new Map([...this.keyMap.keys()].map((k, i) => [k, i]))
         const newIdxMap = new Map([...keyMap.keys()].map((k, i) => [k, i]))
+        const newKeyMap = new Map()
         let lastEl: Element | null = this.element!.firstElementChild
         newIdxMap.forEach((i, k) => {
             let e = keyMap.get(k)!
             const old = this.keyMap.get(k)
             const oi = oldIdxMap.get(k)
             if (old && oi !== undefined && oi === i) {
-                e.element = old.element
-                lastEl = old!.element!
+                // existing key at correct index, merge into old
+                old.merge(e)
+                lastEl = old.element!
+                newKeyMap.set(k, old)
             } else {
                 if (old && old.element) {
-                    e.element = old.element
-                    this.element!.insertBefore(e.element!, lastEl?.nextElementSibling ?? null)
-                    lastEl = e.element!
+                    // existing key at wrong index, merge into old, move html elment
+                    old.merge(e)
+                    this.element!.insertBefore(old.element!, lastEl?.nextElementSibling ?? null)
+                    lastEl = old.element!
+                    newKeyMap.set(k, old)
                 } else {
+                    // non-existing key, create new
                     e.render(this.element!)
+                    newKeyMap.set(k, e)
                 }
             }
         })
-        this.keyMap.clear()
-        keyMap.forEach((v, k) => this.keyMap.set(k, v))
+        this.keyMap = newKeyMap
     }
 
     private renderNonKeyed(c: any[], keyMap: Map<any, JsxElement<any>>): void {
         const newKeysStr = new Set([...keyMap.keys()].map(k => k.toString()))
-        for (let i = 0; i < this.element!.children.length - 1; ) {
+        for (let i = 0; i < this.element!.children.length - 1;) {
             const e = this.element!.children[i]
+            // TODO: can't this.keyMap be used instead?
             const k = e.getAttribute('key')
             if (!k || !newKeysStr.has(k)) {
-                // TODO drop JsxElement holding this node
+                // TODO: drop JsxElement holding this node
                 e.remove()
             } else {
                 i++
@@ -190,9 +203,9 @@ export class JsxElement<P> {
             if (e instanceof JsxElement && e.key !== undefined) {
                 const old = this.keyMap.get(e.key)
                 if (old && old.element) {
-                    e.element = old.element
+                    old.merge(e)
                     // make child last
-                    this.element!.append(e.element)
+                    this.element!.append(old.element)
                 } else {
                     e.render(this.element!)
                 }
@@ -227,8 +240,13 @@ export class JsxElement<P> {
             c.drop()
         } else if (Array.isArray(c)) {
             c.forEach(cc => this.dropChild(cc))
-        } else if (c instanceof Signal) {
-            c.complete()
         }
+    }
+
+    /**
+     * Move required data so that this element is replacing other element and other element is dropped
+     */
+    private merge(other: JsxElement<any>): void {
+        other.drop()
     }
 }
