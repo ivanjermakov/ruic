@@ -121,24 +121,17 @@ export class JsxElement<P> {
             this.unmounts.push(c.onUnmount)
         }
         if (Array.isArray(c)) {
-            const keyMap = new Map(
-                c
-                    .filter(e => e instanceof JsxElement)
-                    .map(e => <JsxElement<any>>e)
-                    .filter(e => e.key !== undefined)
-                    .map(e => <const>[e.key, e])
-            )
             if (this.keyMap && this.keyMap.size === this.element!.children.length) {
                 // fast path: delete all children
-                if (keyMap.size === 0) {
+                if (c.length === 0) {
                     this.keyMap?.forEach(v => v.drop())
                     this.keyMap.clear()
                     this.element!.replaceChildren()
                 } else {
-                    this.renderKeyed(keyMap)
+                    this.renderKeyed(c)
                 }
             } else {
-                this.renderNonKeyed(c, keyMap)
+                this.renderNonKeyed(c)
             }
         } else if (c instanceof Signal) {
             this.renderChild(c.get(), i)
@@ -164,7 +157,8 @@ export class JsxElement<P> {
         }
     }
 
-    private renderKeyed(keyMap: Map<any, JsxElement<any>>): void {
+    private renderKeyed(child: any): void {
+        const keyMap = this.buildKeyMap(child)
         this.keyMap!.forEach((v, k) => {
             if (!keyMap.has(k)) {
                 v.element?.remove()
@@ -172,8 +166,8 @@ export class JsxElement<P> {
                 this.keyMap!.delete(k)
             }
         })
-        const oldIdxMap = new Map([...this.keyMap!.keys()].map((k, i) => [k, i]))
-        const newIdxMap = new Map([...keyMap.keys()].map((k, i) => [k, i]))
+        const oldIdxMap = this.buildIdxMap(this.keyMap!)
+        const newIdxMap = this.buildIdxMap(keyMap)
         const newKeyMap = new Map()
         let lastEl: Element | null = this.element!.firstElementChild
         newIdxMap.forEach((i, k) => {
@@ -202,7 +196,8 @@ export class JsxElement<P> {
         this.keyMap = newKeyMap
     }
 
-    private renderNonKeyed(c: any[], keyMap: Map<any, JsxElement<any>>): void {
+    private renderNonKeyed(child: any[]): void {
+        const keyMap = this.buildKeyMap(child)
         const newKeysStr = new Set([...keyMap.keys()].map(k => k.toString()))
         for (let i = 0; i < this.element!.children.length - 1;) {
             const e = this.element!.children[i]
@@ -215,8 +210,8 @@ export class JsxElement<P> {
                 i++
             }
         }
-        for (let i = 0; i < c.length; i++) {
-            const e = c[i]
+        for (let i = 0; i < child.length; i++) {
+            const e = child[i]
             if (e instanceof JsxElement && e.key !== undefined) {
                 const old = this.keyMap?.get(e.key)
                 if (old && old.element) {
@@ -268,5 +263,25 @@ export class JsxElement<P> {
     private merge(other: JsxElement<any>): void {
         if (this === other) return
         other.drop()
+    }
+
+    private buildKeyMap(child: any[]): Map<any, JsxElement<any>> {
+        const map = new Map()
+        for (const c of child) {
+            if (c instanceof JsxElement && c.key !== undefined) {
+                map.set(c.key, c)
+            }
+        }
+        return map
+    }
+
+    private buildIdxMap(keyMap: Map<any, JsxElement<any>>): Map<any, number> {
+        const map = new Map()
+        let i = 0
+        for (const k of keyMap.keys()) {
+            map.set(k, i)
+            i++
+        }
+        return map
     }
 }

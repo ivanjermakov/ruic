@@ -7,7 +7,7 @@ export interface ForProps<T> {
 }
 export class For<T> extends Signal<JSX.Element[]> {
 
-    private vs: T[]
+    private vs: Map<T, number>
     private es: JSX.Element[]
 
     constructor(public props: ForProps<T>) {
@@ -15,10 +15,10 @@ export class For<T> extends Signal<JSX.Element[]> {
         const fn = props.children
         const es = vs.map((v, i) => fn(v, i))
         super(es)
-        this.vs = vs
+        this.vs = toMap(vs)
         this.es = es
         if (props.each instanceof Signal) {
-            this.vs = props.each.get()
+            this.vs = toMap(props.each.get())
             props.each.feed(this, vs => this.updateArray(vs))
         }
     }
@@ -29,16 +29,22 @@ export class For<T> extends Signal<JSX.Element[]> {
 
     private updateArray(vs: T[]): OperatorResult<JSX.Element[]> {
         this.es = vs.map((e, i) => {
-            const idx = this.vs.indexOf(e)
-            if (idx !== -1) {
+            const idx = this.vs.get(e)
+            if (idx !== undefined) {
                 return this.es[idx]
             }
             return this.props.children(e, i)
         })
-        this.vs = vs
+        this.vs = toMap(vs)
         return {
             type: 'value',
             value: this.es
         }
     }
+
 }
+
+function toMap<T>(vs: T[]): Map<T, number> {
+    return new Map(vs.map((v, i) => [v, i]))
+}
+
